@@ -27,14 +27,15 @@ fn main() {
                                         "credential_definition",
                                         "disclosed_proof",
                                         "issuer_credential",
-                                        "ledger"];
+                                        "ledger",
+                                        "logging"];
 
-    let mut list_of_rust_input_files: Vec<String> = Vec::new();
-    let mut list_of_dart_output_files: Vec<String> = Vec::new();
-    let mut list_of_rust_output_files: Vec<String> = Vec::new();
-    let mut list_of_class_names: Vec<String> = Vec::new();
-    let mut list_of_ios_c_names: Vec<String> = Vec::new();
-    let mut list_of_macos_c_names: Vec<String> = Vec::new();
+    let mut rust_inputs_files: Vec<String> = vec![RUST_INPUT.to_string()];
+    let mut dart_output_files: Vec<String> = vec![DART_OUTPUT.to_string()];
+    let mut rust_output_files: Vec<String> = vec![RUST_OUTPUT.to_string()];
+    let mut class_names: Vec<String> =  vec![CLASS_NAME.to_string()];
+    let mut ios_c_output_files: Vec<String> =  vec![IOS_C_OUTPUT.to_string()];
+    let mut macos_c_files: Vec<String> =  vec![MACOS_C_OUTPUT.to_string()];
 
     for name in list_of_files.iter() {
 
@@ -49,41 +50,20 @@ fn main() {
         let ios_c_output = str::replace(TEMPLATE_IOS_C_OUTPUT, "$$TEMPLATE$$", name);
         let macos_c_output = str::replace(TEMPLATE_MACOS_C_OUTPUT, "$$TEMPLATE$$", name);
 
-        list_of_rust_input_files.push(rust_input);
-        list_of_dart_output_files.push(dart_output);
-        list_of_rust_output_files.push(rust_output);
-        list_of_class_names.push(class_name);
-        list_of_ios_c_names.push(ios_c_output);
-        list_of_macos_c_names.push(macos_c_output);
+        rust_inputs_files.push(rust_input);
+        dart_output_files.push(dart_output);
+        rust_output_files.push(rust_output);
+        class_names.push(class_name);
+        ios_c_output_files.push(ios_c_output);
+        macos_c_files.push(macos_c_output);
     }
-
-    let mut rust_inputs = vec![RUST_INPUT.to_string()];
-    rust_inputs.append(&mut list_of_rust_input_files);
-
-    let mut dart_outputs = vec![DART_OUTPUT.to_string()];
-
-    dart_outputs.append(&mut list_of_dart_output_files);
-
-    let mut ios_c_outputs = vec![IOS_C_OUTPUT.to_string()];
-    ios_c_outputs.append(&mut list_of_ios_c_names);
-
-    let mut macos_c_outputs = vec![MACOS_C_OUTPUT.to_string()];
-    macos_c_outputs.append(&mut list_of_macos_c_names);
-
-    let mut rust_outputs = vec![RUST_OUTPUT.to_string()];
-    rust_outputs.append(&mut list_of_rust_output_files);
-
-    let mut class_names = vec![CLASS_NAME.to_string()];
-    class_names.append(&mut list_of_class_names);
-
-
 
     // Options for frb_codegen
     let raw_opts = RawOpts {
-        rust_input: rust_inputs,
-        dart_output: dart_outputs,
-        c_output: Some(ios_c_outputs.clone()),
-        rust_output: Some(rust_outputs),
+        rust_input: rust_inputs_files,
+        dart_output: dart_output_files,
+        c_output: Some(ios_c_output_files.clone()),
+        rust_output: Some(rust_output_files),
         class_name: Some(class_names),
         inline_rust: true,
         wasm: true,
@@ -98,10 +78,8 @@ fn main() {
     }
 
     // Copy ios/ generated C files to macos/
-    for (index, macos) in macos_c_outputs.iter().enumerate() {
-        let ios: String = ios_c_outputs[index].to_string();
-        // print!("ios {:?} \n", ios);
-        // print!("macos {:?} \n", macos);
+    for (index, ios) in ios_c_output_files.iter().enumerate() {
+        let macos: String = macos_c_files[index].to_string();
         std::fs::copy(ios, macos).unwrap();
     }
 

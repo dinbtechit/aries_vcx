@@ -19,23 +19,31 @@ const TEMPLATE_IOS_C_OUTPUT: &str = "../../flutter_aries_vcx/ios/Classes/$$TEMPL
 const TEMPLATE_MACOS_C_OUTPUT: &str = "../../flutter_aries_vcx/macos/Classes/$$TEMPLATE$$.h";
 
 
-
 fn main() {
-
     let list_of_files: Vec<&str> = vec!["agency_client",
                                         "agent",
                                         "credential_definition",
                                         "disclosed_proof",
                                         "issuer_credential",
                                         "ledger",
-                                        "logging"];
+                                        "logging",
+                                        "mediator_connection",
+                                        "out_of_band_receiver",
+                                        "out_of_band_sender",
+                                        "pool",
+                                        "proof",
+                                        "revocation_registry",
+                                        "schema",
+                                        "utils",
+                                        "wallet",
+    ];
 
     let mut rust_inputs_files: Vec<String> = vec![RUST_INPUT.to_string()];
     let mut dart_output_files: Vec<String> = vec![DART_OUTPUT.to_string()];
     let mut rust_output_files: Vec<String> = vec![RUST_OUTPUT.to_string()];
-    let mut class_names: Vec<String> =  vec![CLASS_NAME.to_string()];
-    let mut ios_c_output_files: Vec<String> =  vec![IOS_C_OUTPUT.to_string()];
-    let mut macos_c_files: Vec<String> =  vec![MACOS_C_OUTPUT.to_string()];
+    let mut class_names: Vec<String> = vec![CLASS_NAME.to_string()];
+    let mut ios_c_output_files: Vec<String> = vec![IOS_C_OUTPUT.to_string()];
+    let mut macos_c_files: Vec<String> = vec![MACOS_C_OUTPUT.to_string()];
 
     for name in list_of_files.iter() {
 

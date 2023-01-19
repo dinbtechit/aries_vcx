@@ -82,12 +82,12 @@ fn wire_create_service_impl(
             let api_routing_keys = routing_keys.wire2api();
             let api_endpoint = endpoint.wire2api();
             move |task_callback| {
-                create_service(
+                Ok(mirror_AriesService(create_service(
                     api_target_did,
                     api_recipient_keys,
                     api_routing_keys,
                     api_endpoint,
-                )
+                )?))
             }
         },
     )
@@ -104,7 +104,11 @@ fn wire_get_service_from_ledger_impl(
         },
         move || {
             let api_target_did = target_did.wire2api();
-            move |task_callback| get_service_from_ledger(api_target_did)
+            move |task_callback| {
+                Ok(mirror_AriesService(get_service_from_ledger(
+                    api_target_did,
+                )?))
+            }
         },
     )
 }
@@ -141,8 +145,20 @@ fn wire_get_ledger_txn_impl(
 }
 // Section: wrapper structs
 
+#[derive(Clone)]
+struct mirror_AriesService(AriesService);
+
 // Section: static checks
 
+const _: fn() = || {
+    let AriesService = None::<AriesService>.unwrap();
+    let _: String = AriesService.id;
+    let _: String = AriesService.type_;
+    let _: u32 = AriesService.priority;
+    let _: Vec<String> = AriesService.recipient_keys;
+    let _: Vec<String> = AriesService.routing_keys;
+    let _: String = AriesService.service_endpoint;
+};
 // Section: allocate functions
 
 // Section: related functions
@@ -180,6 +196,21 @@ impl Wire2Api<u8> for u8 {
 }
 
 // Section: impl IntoDart
+
+impl support::IntoDart for mirror_AriesService {
+    fn into_dart(self) -> support::DartAbi {
+        vec![
+            self.0.id.into_dart(),
+            self.0.type_.into_dart(),
+            self.0.priority.into_dart(),
+            self.0.recipient_keys.into_dart(),
+            self.0.routing_keys.into_dart(),
+            self.0.service_endpoint.into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl support::IntoDartExceptPrimitive for mirror_AriesService {}
 
 // Section: executor
 

@@ -29,7 +29,7 @@ abstract class LedgerFFI {
 
   FlutterRustBridgeTaskConstMeta get kSetActiveTxnAuthorAgreementMetaConstMeta;
 
-  Future<String> createService(
+  Future<AriesService> createService(
       {required String targetDid,
       required List<String> recipientKeys,
       required List<String> routingKeys,
@@ -38,7 +38,7 @@ abstract class LedgerFFI {
 
   FlutterRustBridgeTaskConstMeta get kCreateServiceConstMeta;
 
-  Future<String> getServiceFromLedger(
+  Future<AriesService> getServiceFromLedger(
       {required String targetDid, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kGetServiceFromLedgerConstMeta;
@@ -51,6 +51,24 @@ abstract class LedgerFFI {
       {required int seqNo, String? submitterDid, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kGetLedgerTxnConstMeta;
+}
+
+class AriesService {
+  final String id;
+  final String type;
+  final int priority;
+  final List<String> recipientKeys;
+  final List<String> routingKeys;
+  final String serviceEndpoint;
+
+  AriesService({
+    required this.id,
+    required this.type,
+    required this.priority,
+    required this.recipientKeys,
+    required this.routingKeys,
+    required this.serviceEndpoint,
+  });
 }
 
 class LedgerFFIImpl implements LedgerFFI {
@@ -115,7 +133,7 @@ class LedgerFFIImpl implements LedgerFFI {
             ],
           );
 
-  Future<String> createService(
+  Future<AriesService> createService(
       {required String targetDid,
       required List<String> recipientKeys,
       required List<String> routingKeys,
@@ -128,7 +146,7 @@ class LedgerFFIImpl implements LedgerFFI {
     return _platform.executeNormal(FlutterRustBridgeTask(
       callFfi: (port_) =>
           _platform.inner.wire_create_service(port_, arg0, arg1, arg2, arg3),
-      parseSuccessData: _wire2api_String,
+      parseSuccessData: _wire2api_aries_service,
       constMeta: kCreateServiceConstMeta,
       argValues: [targetDid, recipientKeys, routingKeys, endpoint],
       hint: hint,
@@ -141,13 +159,13 @@ class LedgerFFIImpl implements LedgerFFI {
         argNames: ["targetDid", "recipientKeys", "routingKeys", "endpoint"],
       );
 
-  Future<String> getServiceFromLedger(
+  Future<AriesService> getServiceFromLedger(
       {required String targetDid, dynamic hint}) {
     var arg0 = _platform.api2wire_String(targetDid);
     return _platform.executeNormal(FlutterRustBridgeTask(
       callFfi: (port_) =>
           _platform.inner.wire_get_service_from_ledger(port_, arg0),
-      parseSuccessData: _wire2api_String,
+      parseSuccessData: _wire2api_aries_service,
       constMeta: kGetServiceFromLedgerConstMeta,
       argValues: [targetDid],
       hint: hint,
@@ -205,6 +223,28 @@ class LedgerFFIImpl implements LedgerFFI {
 
   String _wire2api_String(dynamic raw) {
     return raw as String;
+  }
+
+  List<String> _wire2api_StringList(dynamic raw) {
+    return (raw as List<dynamic>).cast<String>();
+  }
+
+  AriesService _wire2api_aries_service(dynamic raw) {
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return AriesService(
+      id: _wire2api_String(arr[0]),
+      type: _wire2api_String(arr[1]),
+      priority: _wire2api_u32(arr[2]),
+      recipientKeys: _wire2api_StringList(arr[3]),
+      routingKeys: _wire2api_StringList(arr[4]),
+      serviceEndpoint: _wire2api_String(arr[5]),
+    );
+  }
+
+  int _wire2api_u32(dynamic raw) {
+    return raw as int;
   }
 
   int _wire2api_u8(dynamic raw) {

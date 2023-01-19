@@ -1,5 +1,18 @@
 use vcx::api_vcx::api_global::ledger;
 use vcx::serde_json::json;
+use flutter_rust_bridge::frb;
+pub use vcx::aries_vcx::messages::diddoc::aries::service::AriesService;
+
+#[frb(mirror(AriesService))]
+#[derive(Debug, Clone)]
+pub struct _AriesService {
+    pub id: String,
+    pub type_: String,
+    pub priority: u32,
+    pub recipient_keys: Vec<String>,
+    pub routing_keys: Vec<String>,
+    pub service_endpoint: String,
+}
 
 #[tokio::main(flavor = "current_thread")]
 pub async fn get_ledger_author_agreement() -> anyhow::Result<String> {
@@ -26,17 +39,17 @@ pub async fn create_service(
     recipient_keys: Vec<String>,
     routing_keys: Vec<String>,
     endpoint: String,
-) -> anyhow::Result<String> {
+) -> anyhow::Result<AriesService> {
     let res = ledger::ledger_write_endpoint_legacy(&target_did, recipient_keys, routing_keys, endpoint)
         .await
         .map_err(anyhow::Error::from)?;
-    Ok(json!(res).to_string())
+    Ok(res)
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn get_service_from_ledger(target_did: String) -> anyhow::Result<String> {
+pub async fn get_service_from_ledger(target_did: String) -> anyhow::Result<AriesService> {
     let res = ledger::ledger_get_service(&target_did).await.map_err(anyhow::Error::from)?;
-    Ok(json!(res).to_string())
+    Ok(res)
 }
 
 #[tokio::main(flavor = "current_thread")]

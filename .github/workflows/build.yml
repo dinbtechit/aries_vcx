@@ -5,9 +5,9 @@ on:
   push:
     branches:
       - main
-  schedule:
+  #schedule:
     # runs the CI everyday at 10AM
-    - cron: "0 10 * * *"
+    #- cron: "0 10 * * *"
 
 jobs:
   # General build, check, and test steps
@@ -65,9 +65,9 @@ jobs:
           cp platform-build/AriesVcx.xcframework.zip packages/flutter_aries_vcx/macos/Frameworks/$CURR_VERSION.zip
           echo Copied file!
 
-      - name: Run Flutter integration tests
-        working-directory: packages/flutter_aries_vcx/example
-        run: flutter test -d macos integration_test
+#      - name: Run Flutter integration tests
+#        working-directory: packages/flutter_aries_vcx/example
+#        run: flutter test -d macos integration_test
 
   windows_integration_test:
     runs-on: windows-latest

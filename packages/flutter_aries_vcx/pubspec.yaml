@@ -11,7 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  aries_vcx: 1.0.0
 
 dev_dependencies:
   #ffi: ^1.2.1

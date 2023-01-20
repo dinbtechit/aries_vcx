@@ -1,9 +1,31 @@
+use anyhow::Error;
 use vcx::api_vcx::api_handle::mediated_connection;
-use vcx::api_vcx::api_handle::mediated_connection::parse_status_codes;
-
+pub use vcx::api_vcx::api_handle::mediated_connection::{MessageByConnection, parse_status_codes};
+pub use vcx::aries_vcx::agency_client::api::downloaded_message::DownloadedMessage;
+pub use vcx::aries_vcx::agency_client::MessageStatusCode;
+use flutter_rust_bridge::frb;
 use vcx::aries_vcx::protocols::connection::pairwise_info::PairwiseInfo;
 use vcx::errors::error::{LibvcxError, LibvcxErrorKind};
 use vcx::serde_json;
+
+#[frb(mirror(MessageByConnection))]
+pub struct _MessageByConnection {
+    pub pairwise_did: String,
+    pub msgs: Vec<DownloadedMessage>,
+}
+
+#[frb(mirror(DownloadedMessage))]
+pub struct _DownloadedMessage {
+    pub status_code: MessageStatusCode,
+    pub uid: String,
+    pub decrypted_msg: String,
+}
+
+#[frb(mirror(MessageStatusCode))]
+pub enum _MessageStatusCode {
+    Received,
+    Reviewed,
+}
 
 
 pub fn mediated_connection_generate_public_invite(public_did: String, label: String) -> anyhow::Result<String> {

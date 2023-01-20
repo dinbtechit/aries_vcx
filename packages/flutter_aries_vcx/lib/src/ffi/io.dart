@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 DynamicLibrary createLibraryImpl() {
-  const base = 'embedded_milli';
+  const base = 'aries_vcx';
 
   if (Platform.isIOS || Platform.isMacOS) {
     return DynamicLibrary.executable();

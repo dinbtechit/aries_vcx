@@ -59,7 +59,12 @@ jobs:
           toolchain: stable
 
       - name: Build the XCFramework
-        run: melos run build:apple
+        run: |
+          wget https://github.com/macports/macports-base/releases/download/v2.8.0/MacPorts-2.8.0-12-Monterey.pkg
+          sudo installer -pkg ./MacPorts-2.8.0-12-Monterey.pkg -target /
+          export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+          sudo port install openssl +universal zmq +universal
+          melos run build:apple
       - name: Copy the XCFramework to the needed location
         run: |
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`
@@ -147,7 +152,6 @@ jobs:
           sudo installer -pkg ./MacPorts-2.8.0-12-Monterey.pkg -target /
           export PATH=/opt/local/bin:/opt/local/sbin:$PATH
           sudo port install openssl +universal zmq +universal
-          export OPENSSL_DIR=/opt/local
           melos run build:apple
       - name: Copy the XCFramework to the needed location
         run: |

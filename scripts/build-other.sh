@@ -33,12 +33,15 @@ win_build () {
 LINUX_LIBNAME=libaries_vcx.so
 zig_build aarch64-unknown-linux-gnu linux-arm64 $LINUX_LIBNAME
 zig_build x86_64-unknown-linux-gnu linux-x64 $LINUX_LIBNAME
-WINDOWS_LIBNAME=aries_vcx.dll
-win_build aarch64-pc-windows-msvc windows-arm64 $WINDOWS_LIBNAME
-win_build x86_64-pc-windows-msvc windows-x64 $WINDOWS_LIBNAME
+
+# WINDOWS_LIBNAME=aries_vcx.dll
+# win_build aarch64-pc-windows-msvc windows-arm64 $WINDOWS_LIBNAME
+# win_build x86_64-pc-windows-msvc windows-x64 $WINDOWS_LIBNAME
 
 # Archive the dynamic libs
-tar -czvf AriesVcx.tar.gz linux-* windows-*
+#tar -czvf AriesVcx.tar.gz linux-* windows-*
+tar -czvf AriesVcx-linux.tar.gz linux-*
 
 # Cleanup
-rm -rf linux-* windows-*
+#rm -rf linux-* windows-*
+rm -rf linux-*

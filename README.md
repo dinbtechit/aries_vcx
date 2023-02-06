@@ -19,6 +19,6 @@ final instance = await AriesVcx.defaultInstance;
 final instance = AriesVcx.getInstance(
   path: instanceDirectory,
   // Following line will change based on your platform
-  library: DynamicLibrary.open('libembedded_ariesvcx.so'),
+  library: DynamicLibrary.open('libaries_vcx.so'),
 );
 ```

@@ -38,6 +38,10 @@ scripts:
     run: bash scripts/build-android.sh
     description: Build the .tar.gz for Android.
 
+  build:windows:
+    run: bash scripts/build-windows.sh
+    description: Build the .tar.gz for Windows.
+
   build:other:
     run: bash scripts/build-other.sh
     description: Build the .tar.gz for all other platforms.

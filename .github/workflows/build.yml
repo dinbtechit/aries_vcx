@@ -99,7 +99,7 @@ jobs:
         shell: bash
         run: |
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`
-          cp platform-build/AriesVcx.tar.gz packages/flutter_aries_vcx/windows/$CURR_VERSION.tar.gz
+          cp platform-build/AriesVcx-windows.tar.gz packages/flutter_aries_vcx/windows/$CURR_VERSION.tar.gz
           echo Copied file!
 
 #      - name: Run Flutter integration tests

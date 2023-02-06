@@ -82,8 +82,6 @@ setup_dependencies_env_vars
 
 echo $OPENSSL_LIB_DIR
 
-exit 0
-
 # Build all the dynamic libraries
 WINDOWS_LIBNAME=aries_vcx.dll
 win_build aarch64-pc-windows-msvc windows-arm64 $WINDOWS_LIBNAME

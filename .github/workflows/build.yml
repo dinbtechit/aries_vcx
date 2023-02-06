@@ -129,7 +129,7 @@ jobs:
       - name: Copy the binaries to the needed location
         run: |
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`
-          cp platform-build/AriesVcx.tar.gz packages/flutter_aries_vcx/linux/$CURR_VERSION.tar.gz
+          cp platform-build/AriesVcx-linux.tar.gz packages/flutter_aries_vcx/linux/$CURR_VERSION.tar.gz
           echo Copied file!
 
 #      - name: Run Flutter integration tests

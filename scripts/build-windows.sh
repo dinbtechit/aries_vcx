@@ -40,7 +40,7 @@ prepare_dependencies() {
 setup_dependencies_env_vars(){
     #TARGET_ARCH="$1"
 
-    export DEPS_DIR=$(pwd)/${WINDOWS_BUILD_FOLDER}/indy_deps
+    export DEPS_DIR=$(pwd)/${WINDOWS_BUILD_FOLDER}
 
     export PKG_CONFIG_ALLOW_CROSS=1
 
@@ -79,6 +79,10 @@ win_build () {
 
 prepare_dependencies
 setup_dependencies_env_vars
+
+echo $OPENSSL_LIB_DIR
+
+exit 0
 
 # Build all the dynamic libraries
 WINDOWS_LIBNAME=aries_vcx.dll

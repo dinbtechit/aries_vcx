@@ -131,8 +131,7 @@ jobs:
           echo "openssl:................ Installed in"
           dpkg -L openssl
           echo "libzmq3-dev:................ Installed in"
-          dpkg -L libzmq3-dev
-          exit 1
+          dpkg -L libzmq3-dev          
           melos run build:other
       - name: Copy the binaries to the needed location
         run: |

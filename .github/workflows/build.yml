@@ -106,7 +106,7 @@ jobs:
 #        run: flutter test -d windows integration_test
 
   linux_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: ubuntu-latest
 
     steps:

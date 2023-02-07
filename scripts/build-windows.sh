@@ -37,6 +37,18 @@ prepare_dependencies() {
     popd
 }
 
+prepare_dependencies_arm() {
+  echo "prepare_dependencies >> TARGET_ARCH=${TARGET_ARCH}"
+  mkdir -p "${WINDOWS_BUILD_FOLDER}-arm64"
+  pushd "${WINDOWS_BUILD_FOLDER}-arm64"
+    git clone https://github.com/Microsoft/vcpkg
+    cd vcpkg
+    bootstrap-vcpkg.bat
+    vcpkg install zeromq:arm64-windows
+    ls -la
+  popd
+}
+
 setup_dependencies_env_vars(){
     #TARGET_ARCH="$1"
 
@@ -77,7 +89,10 @@ win_build () {
     cp "../target/$TARGET/release/$LIBNAME" "$PLATFORM_NAME/"
 }
 
+
+
 prepare_dependencies
+prepare_dependencies_arm
 setup_dependencies_env_vars
 
 echo $OPENSSL_LIB_DIR

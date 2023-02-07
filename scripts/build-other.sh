@@ -29,6 +29,23 @@ win_build () {
     cp "../target/$TARGET/release/$LIBNAME" "$PLATFORM_NAME/"
 }
 
+export OPENSSL_DIR=/opt/local
+export OPENSSL_INCLUDE_DIR=/opt/local/include/
+export OPENSSL_LIB_DIR=/opt/local/lib/
+export SODIUM_LIB_DIR=/opt/local/lib/
+export SODIUM_INCLUDE_DIR=/opt/local/include
+export LIBZMQ_LIB_DIR=/opt/local/lib/
+export LIBZMQ_INCLUDE_DIR=/opt/local/include
+export PKG_CONFIG_ALLOW_CROSS=1
+export PKG_CONFIG_SYSROOT_DIR=/
+export RUST_BACKTRACE=1
+
+ls -la /usr/local
+ls -la /usr/local/lib
+ls -la /usr/local/include
+ls -la /opt/local
+ls -la /opt/local/lib
+
 # Build all the dynamic libraries
 LINUX_LIBNAME=libaries_vcx.so
 zig_build aarch64-unknown-linux-gnu linux-arm64 $LINUX_LIBNAME

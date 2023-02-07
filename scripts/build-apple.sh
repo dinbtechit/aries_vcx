@@ -87,17 +87,18 @@ extract_architectures() {
     popd
 }
 
-build_libzmq
-build_libsodium
-build_crypto
-extract_architectures ../../libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
-extract_architectures ../../libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
-extract_architectures ../../OpenSSL-for-iPhone/lib/libssl.a libssl openssl
-extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
+if [ $BUILD_TYPE != "macos" ]; then
+ build_libzmq
+ build_libsodium
+ build_crypto
+ extract_architectures ../../libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
+ extract_architectures ../../libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
+ extract_architectures ../../OpenSSL-for-iPhone/lib/libssl.a libssl openssl
+ extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
 
 #extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
 #extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
-
+fi
 #aarch64-apple-ios aarch64-apple-ios-sim aarch64-apple-darwin \
  #        x86_64-apple-ios x86_64-apple-darwin
 # Build static libs

@@ -124,15 +124,7 @@ jobs:
           toolchain: stable
 
       - name: Build the binaries
-        run: |
-          sudo apt-get install -y libssl-dev libzmq3-dev
-          echo "libssl-dev:................ Installed in"
-          dpkg -L libssl-dev
-          echo "openssl:................ Installed in"
-          dpkg -L openssl
-          echo "libzmq3-dev:................ Installed in"
-          dpkg -L libzmq3-dev          
-          melos run build:other
+        run: melos run build:other
       - name: Copy the binaries to the needed location
         run: |
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`

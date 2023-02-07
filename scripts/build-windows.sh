@@ -92,7 +92,7 @@ win_build () {
 
 
 prepare_dependencies
-prepare_dependencies_arm
+#prepare_dependencies_arm
 setup_dependencies_env_vars
 
 echo $OPENSSL_LIB_DIR

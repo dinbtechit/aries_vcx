@@ -51,6 +51,7 @@ jobs:
 #          attempt_limit: 5
 
   macos_integration_test:
+    if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:
@@ -79,6 +80,7 @@ jobs:
 #        run: flutter test -d macos integration_test
 
   windows_integration_test:
+    if: github.repository == 'disabled'
     runs-on: windows-latest
 
     steps:

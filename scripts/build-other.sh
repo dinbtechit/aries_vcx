@@ -36,7 +36,7 @@ ls -la /usr/lib
 ls -la /usr/include
 
 export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu
-export OPENSSL_INCLUDE_DIR=/usr/include
+export OPENSSL_INCLUDE_DIR=/usr/include/openssl
 export SODIUM_LIB_DIR=/usr/lib/x86_64-linux-gnu
 export SODIUM_INCLUDE_DIR=/usr/include
 export LIBZMQ_LIB_DIR=/usr/lib/x86_64-linux-gnu

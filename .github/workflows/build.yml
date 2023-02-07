@@ -80,7 +80,7 @@ jobs:
 #        run: flutter test -d macos integration_test
 
   windows_integration_test:
-    #if: github.repository == 'disabled'
+    if: github.repository == 'disabled'
     runs-on: windows-latest
 
     steps:

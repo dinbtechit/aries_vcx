@@ -29,22 +29,21 @@ win_build () {
     cp "../target/$TARGET/release/$LIBNAME" "$PLATFORM_NAME/"
 }
 
-#export OPENSSL_LIB_DIR=/usr/lib
-#export OPENSSL_INCLUDE_DIR=/usr/include
-#export SODIUM_LIB_DIR=/usr/lib
-#export SODIUM_INCLUDE_DIR=/usr/include
-#export LIBZMQ_LIB_DIR=/usr/lib
-#export LIBZMQ_INCLUDE_DIR=/usr/include
-#export PKG_CONFIG_ALLOW_CROSS=1
-#export PKG_CONFIG_SYSROOT_DIR=/
-#export RUST_BACKTRACE=1
-#
-
 sudo apt-get update -y
 sudo apt-get install -y libssl-dev libzmq3-dev
 
 ls -la /usr/lib
 ls -la /usr/include
+
+export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu
+export OPENSSL_INCLUDE_DIR=/usr/include
+export SODIUM_LIB_DIR=/usr/lib/x86_64-linux-gnu
+export SODIUM_INCLUDE_DIR=/usr/include
+export LIBZMQ_LIB_DIR=/usr/lib/x86_64-linux-gnu
+export LIBZMQ_INCLUDE_DIR=/usr/include
+export PKG_CONFIG_ALLOW_CROSS=1
+export PKG_CONFIG_SYSROOT_DIR=/
+export RUST_BACKTRACE=1
 
 # Build all the dynamic libraries
 LINUX_LIBNAME=libaries_vcx.so

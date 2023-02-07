@@ -30,6 +30,10 @@ scripts:
     run: melos run build:apple && melos run build:android && melos run build:other
     description: Build all native libraries for the project.
 
+  build:macos:
+    run: bash scripts/build-apple.sh macos
+    description: Build the XCFramework macOS.
+
   build:apple:
     run: bash scripts/build-apple.sh
     description: Build the XCFramework for iOS and macOS.

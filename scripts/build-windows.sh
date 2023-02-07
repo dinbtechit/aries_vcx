@@ -99,7 +99,9 @@ echo $OPENSSL_LIB_DIR
 
 # Build all the dynamic libraries
 WINDOWS_LIBNAME=aries_vcx.dll
-win_build aarch64-pc-windows-msvc windows-arm64 $WINDOWS_LIBNAME
+
+# TODO figure out a way to build for windows arm64
+# win_build aarch64-pc-windows-msvc windows-arm64 $WINDOWS_LIBNAME
 win_build x86_64-pc-windows-msvc windows-x64 $WINDOWS_LIBNAME
 
 # Archive the dynamic libs

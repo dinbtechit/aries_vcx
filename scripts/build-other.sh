@@ -39,9 +39,10 @@ win_build () {
 #export PKG_CONFIG_SYSROOT_DIR=/
 #export RUST_BACKTRACE=1
 #
-#ls -la /usr/lib
-#ls -la /usr/include
+ls -la /usr/lib
+ls -la /usr/include
 
+sudo apt-get update -y
 sudo apt-get install -y libssl-dev libzmq3-dev
 
 # Build all the dynamic libraries

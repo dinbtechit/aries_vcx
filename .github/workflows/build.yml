@@ -124,6 +124,10 @@ jobs:
       - name: Build the binaries
         run: |
           sudo apt-get install -y libssl-dev libzmq3-dev
+          apt list | grep libssl-dev
+          apt list | grep openssl
+          apt list | grep libzmq3-dev
+          exit 0
           melos run build:other
       - name: Copy the binaries to the needed location
         run: |

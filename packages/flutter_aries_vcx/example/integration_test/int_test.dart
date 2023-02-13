@@ -9,7 +9,7 @@ Future<void> pause() => Future.delayed(const Duration(milliseconds: 500));
 
 void main() {
 
-  testWidgets('Searching returns expected titles', (tester) async {
+  testWidgets('TODO write tests', (tester) async {
 
   });
 }

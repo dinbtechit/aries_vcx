@@ -2,8 +2,8 @@
 
 # Setup
 BUILD_DIR=platform-build
-mkdir $BUILD_DIR
-cd $BUILD_DIR
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR || return
 
 # Install build dependencies
 cargo install cargo-zigbuild

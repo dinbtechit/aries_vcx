@@ -40,7 +40,6 @@ class MediatorConnectionFFIPlatform
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module
@@ -81,14 +80,16 @@ class MediatorConnectionFFIWasmModule implements WasmModule {
   external dynamic /* void */ wire_mediated_connection_send_message(
       NativePortType port_, int handle, String msg);
 
-  external dynamic /* void */ wire_mediated_connection_create_with_connection_request_v2(
-      NativePortType port_, String request, String pw_info);
+  external dynamic /* void */
+      wire_mediated_connection_create_with_connection_request_v2(
+          NativePortType port_, String request, String pw_info);
 
   external dynamic /* void */ wire_mediated_connection_send_handshake_reuse(
       NativePortType port_, int handle, String oob_msg);
 
-  external dynamic /* void */ wire_mediated_connection_update_state_with_message(
-      NativePortType port_, int handle, String message);
+  external dynamic /* void */
+      wire_mediated_connection_update_state_with_message(
+          NativePortType port_, int handle, String message);
 
   external dynamic /* void */ wire_mediated_connection_handle_message(
       NativePortType port_, int handle, String message);

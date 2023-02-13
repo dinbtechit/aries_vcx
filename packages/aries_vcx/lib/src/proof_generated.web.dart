@@ -28,7 +28,6 @@ class ProofFFIPlatform extends FlutterRustBridgeBase<ProofFFIWire>
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

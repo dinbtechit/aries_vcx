@@ -28,7 +28,6 @@ class PoolFFIPlatform extends FlutterRustBridgeBase<PoolFFIWire>
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

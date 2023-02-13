@@ -29,7 +29,6 @@ class AriesVcxImpl implements AriesVcx {
     _platform.dispose();
   }
 // Section: wire2api
-
 }
 
 // Section: api2wire

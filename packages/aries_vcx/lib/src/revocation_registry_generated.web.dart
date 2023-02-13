@@ -48,7 +48,6 @@ class RevocationRegistryFFIPlatform
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

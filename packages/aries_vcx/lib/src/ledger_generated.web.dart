@@ -14,6 +14,7 @@ class LedgerFFIPlatform extends FlutterRustBridgeBase<LedgerFFIWire>
   LedgerFFIPlatform(FutureOr<WasmModule> dylib) : super(LedgerFFIWire(dylib)) {
     setupMixinConstructor();
   }
+
   Future<void> setup() => inner.init;
 
 // Section: api2wire
@@ -43,7 +44,6 @@ class LedgerFFIPlatform extends FlutterRustBridgeBase<LedgerFFIWire>
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module
@@ -55,7 +55,9 @@ external LedgerFFIWasmModule get wasmModule;
 @anonymous
 class LedgerFFIWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
+
   external LedgerFFIWasmModule bind(dynamic thisArg, String moduleName);
+
   external dynamic /* void */ wire_get_ledger_author_agreement(
       NativePortType port_);
 

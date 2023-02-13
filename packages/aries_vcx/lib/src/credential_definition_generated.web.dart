@@ -30,7 +30,6 @@ class CredentialDefinitionFFIPlatform
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

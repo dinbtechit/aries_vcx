@@ -35,7 +35,6 @@ class OutOfBandReceiverFFIPlatform
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

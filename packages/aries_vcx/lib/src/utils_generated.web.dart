@@ -28,7 +28,6 @@ class UtilsFFIPlatform extends FlutterRustBridgeBase<UtilsFFIWire>
     return raw == null ? null : api2wire_box_autoadd_bool(raw);
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

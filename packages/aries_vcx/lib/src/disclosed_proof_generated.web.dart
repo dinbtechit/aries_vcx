@@ -35,7 +35,6 @@ class DisclosedProofFFIPlatform
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

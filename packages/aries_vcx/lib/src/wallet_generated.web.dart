@@ -79,7 +79,6 @@ class WalletFFIPlatform extends FlutterRustBridgeBase<WalletFFIWire>
     ];
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

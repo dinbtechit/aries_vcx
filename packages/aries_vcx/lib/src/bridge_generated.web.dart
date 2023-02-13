@@ -19,7 +19,6 @@ class AriesVcxPlatform extends FlutterRustBridgeBase<AriesVcxWire>
 // Section: api2wire
 
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

@@ -30,7 +30,6 @@ class OutOfBandSenderFFIPlatform
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

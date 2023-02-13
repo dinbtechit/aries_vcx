@@ -18,7 +18,6 @@ class AriesVcxPlatform extends FlutterRustBridgeBase<AriesVcxWire> {
 // Section: finalizer
 
 // Section: api_fill_to_wire
-
 }
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_positional_boolean_parameters, annotate_overrides, constant_identifier_names

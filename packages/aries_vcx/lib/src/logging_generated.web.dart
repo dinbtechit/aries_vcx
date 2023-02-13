@@ -34,7 +34,6 @@ class LoggingFFIPlatform extends FlutterRustBridgeBase<LoggingFFIWire>
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

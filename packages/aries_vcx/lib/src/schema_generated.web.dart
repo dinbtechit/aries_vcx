@@ -28,7 +28,6 @@ class SchemaFFIPlatform extends FlutterRustBridgeBase<SchemaFFIWire>
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

@@ -35,7 +35,6 @@ class IssuerCredentialFFIPlatform
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module
@@ -58,11 +57,9 @@ class IssuerCredentialFFIWasmModule implements WasmModule {
   external dynamic /* void */ wire_issuer_credential_update_state_v2(
       NativePortType port_, int handle_credential, int connection_handle);
 
-  external dynamic /* void */ wire_issuer_credential_update_state_with_message_v2(
-      NativePortType port_,
-      int handle_credential,
-      int connection_handle,
-      String message);
+  external dynamic /* void */
+      wire_issuer_credential_update_state_with_message_v2(NativePortType port_,
+          int handle_credential, int connection_handle, String message);
 
   external dynamic /* void */ wire_issuer_credential_get_state(
       NativePortType port_, int handle_credential);

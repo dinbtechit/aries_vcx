@@ -28,7 +28,6 @@ class AgentFFIPlatform extends FlutterRustBridgeBase<AgentFFIWire>
     return raw;
   }
 // Section: finalizer
-
 }
 
 // Section: WASM wire module

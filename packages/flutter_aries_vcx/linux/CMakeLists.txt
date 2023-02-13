@@ -1,4 +1,4 @@
-set(AriesVcxVersion "aries_vcx-v0.0.0") # generated; do not edit
+set(AriesVcxVersion "AriesVcx") # generated; do not edit
 
 # The Flutter tooling requires that developers have CMake 3.10 or later
 # installed. You should not increase this version, as doing so will cause
@@ -11,10 +11,10 @@ project(${PROJECT_NAME} LANGUAGES CXX)
 
 # Download the binaries if they are not already present.
 set(AriesVcxLibRoot "${CMAKE_CURRENT_SOURCE_DIR}/${AriesVcxVersion}")
-set(AriesVcxArchivePath "${AriesVcxLibRoot}.tar.gz")
+set(AriesVcxArchivePath "${AriesVcxLibRoot}-${FLUTTER_TARGET_PLATFORM}.tar.gz")
 if(NOT EXISTS ${AriesVcxArchivePath})
   file(DOWNLOAD
-    "https://github.com/dinbtechit/aries_vcx/releases/download/${AriesVcxVersion}/AriesVcx.tar.gz"
+    "https://github.com/dinbtechit/aries_vcx/releases/download/${AriesVcxVersion}/AriesVcx-${FLUTTER_TARGET_PLATFORM}.tar.gz"
     ${AriesVcxArchivePath}
     TLS_VERIFY ON
   )

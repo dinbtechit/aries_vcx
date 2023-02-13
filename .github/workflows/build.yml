@@ -25,19 +25,18 @@ jobs:
         with:
           toolchain: stable
           components: rustfmt, clippy
-
+      - name: Install Aries VCX Dependencies
+        run: sudo apt-get install -y libssl-dev libzmq3-dev
       # Rust
 #      - name: Check Rust format
 #        working-directory: ./packages/aries_vcx/native/src
 #        run: rustfmt --check lib.rs
 #      - name: Rust code analysis
 #        run: cargo clippy -- -D warnings
-#      - name: Run Rust tests
-#        run: cargo test
+      - name: Run Rust tests
+        run: cargo test
       - name: Build Rust code (aries_vcx) for Dart tests
-        run: |
-          sudo apt-get install -y libssl-dev libzmq3-dev
-          cargo build -r
+        run: cargo build -r
 
       # Dart/Flutter
 #      - name: Check Dart format
@@ -88,12 +87,12 @@ jobs:
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/melos-action@v2
       - uses: KyleMayes/install-llvm-action@v1
+      - uses: vedantmgoyal2009/winget-releaser@v2
         with:
           version: "15"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-
       - name: Build the binaries
         run: melos run build:windows
       - name: Copy the binaries to the needed location
@@ -102,6 +101,7 @@ jobs:
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`
           cp platform-build/AriesVcx-windows.tar.gz packages/flutter_aries_vcx/windows/$CURR_VERSION.tar.gz
           echo Copied file!
+          ls -la target
 
 #      - name: Run Flutter integration tests
 #        working-directory: packages/flutter_aries_vcx/example
@@ -173,7 +173,7 @@ jobs:
 #        run: flutter test -d ${{ env.DEVICE_ID }} integration_test
 
   android_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:
@@ -198,6 +198,8 @@ jobs:
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`
           cp platform-build/AriesVcxAndroid.tar.gz packages/flutter_aries_vcx/android/$CURR_VERSION.tar.gz
           echo Copied file!
+          ls -la platform-build
+          ls -la target
 
 #      - name: Run Flutter integration tests
 #        uses: Wandalen/wretry.action@master # sometimes android tests are flaky

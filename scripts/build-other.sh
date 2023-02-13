@@ -40,6 +40,8 @@ set_env() {
     PLATFORM="x86_64-linux-gnu"
   fi
 
+  ls -la /usr/lib/$PLATFORM
+
   export OPENSSL_LIB_DIR=/usr/lib/$PLATFORM
   export OPENSSL_INCLUDE_DIR=/usr/include
   export SODIUM_LIB_DIR=/usr/lib/$PLATFORM
@@ -67,6 +69,10 @@ LINUX_LIBNAME=libaries_vcx.so
 #export RUST_BACKTRACE=1
 
 PROCESSOR_TYPE=$(uname -p)
+
+echo "#######################"
+echo "$PROCESSOR_TYPE"
+echo "#######################"
 
 if [ "$PROCESSOR_TYPE" == "aarch64" ]; then
   zig_build aarch64-unknown-linux-gnu linux-arm64 $LINUX_LIBNAME

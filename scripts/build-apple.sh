@@ -108,7 +108,7 @@ if [ $BUILD_TYPE == "macos" ]; then
   ARCHS="aarch64-apple-darwin x86_64-apple-darwin"
 fi
 
-for TARGET in $ARCHS
+for TARGET in x86_64-apple-ios
 do
     echo "#############################"
     pwd
@@ -136,8 +136,9 @@ do
       export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-arm64.sdk/include
       #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/arm64
       #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/dist/ios/include
-      export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/libzmq/builds/ios/libzmq_build/arm64-sim/lib
-      export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64/include
+      export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/lib
+      export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/include
+      #unset LIBZMQ_INCLUDE_DIR
     fi
     if [ $TARGET == "x86_64-apple-ios" ]; then
         echo "###########################"
@@ -148,10 +149,10 @@ do
         #export OPENSSL_LIB_DIR=/opt/local/lib/
         export OPENSSL_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/openssl/x86_64/
         export OPENSSL_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
-        export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/x86_64
-        export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/dist/ios/include
-        export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/libzmq/builds/ios/libzmq_build/x86_64/lib
-        export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/libzmq/include
+        #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/x86_64
+        #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/dist/ios/include
+        export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-x86_64/lib
+        export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-x86_64/include
     fi
 
     cargo build -r --target=$TARGET

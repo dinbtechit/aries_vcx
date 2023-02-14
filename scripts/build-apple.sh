@@ -87,7 +87,7 @@ extract_architectures() {
     popd
 }
 
-if [ "$BUILD_TYPE" != "macos1" ]; then
+if [ "$BUILD_TYPE" != "macos" ]; then
  build_libzmq
  build_libsodium
  build_crypto

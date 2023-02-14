@@ -13,7 +13,7 @@ on:
 jobs:
   # General build, check, and test steps
   build_and_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: ubuntu-latest
 
     steps:
@@ -25,6 +25,8 @@ jobs:
         with:
           toolchain: stable
           components: rustfmt, clippy
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2.2.0
       - name: Install Aries VCX Dependencies
         run: sudo apt-get install -y libssl-dev libzmq3-dev
       # Rust
@@ -50,7 +52,7 @@ jobs:
 #          attempt_limit: 5
 
   macos_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:
@@ -60,14 +62,16 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-
-      - name: Build the XCFramework
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2.2.0
+      - name: Install Aries VCX Dependencies
         run: |
           wget https://github.com/macports/macports-base/releases/download/v2.8.0/MacPorts-2.8.0-12-Monterey.pkg
           sudo installer -pkg ./MacPorts-2.8.0-12-Monterey.pkg -target /
           export PATH=/opt/local/bin:/opt/local/sbin:$PATH
           sudo port install openssl +universal zmq +universal
-          melos run build:macos
+      - name: Build the XCFramework
+        run: melos run build:macos
       - name: Copy the XCFramework to the needed location
         run: |
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`
@@ -108,6 +112,7 @@ jobs:
           echo Copied file!
           ls -la target
           choco install openssl
+          choco install minisign
 
 #      - name: Run Flutter integration tests
 #        working-directory: packages/flutter_aries_vcx/example

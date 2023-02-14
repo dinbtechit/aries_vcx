@@ -5,7 +5,7 @@ BUILD_DIR=platform-build
 OUTPUT_DIR=output
 SCRIPT_DIR=scripts
 mkdir $BUILD_DIR
-cd $BUILD_DIR
+cd $BUILD_DIR || return
 BUILD_TYPE=$1
 
 
@@ -87,7 +87,7 @@ extract_architectures() {
     popd
 }
 
-if [ $BUILD_TYPE != "macos" ]; then
+if [ "$BUILD_TYPE" != "macos1" ]; then
  build_libzmq
  build_libsodium
  build_crypto
@@ -95,25 +95,24 @@ if [ $BUILD_TYPE != "macos" ]; then
  extract_architectures ../../libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
  extract_architectures ../../OpenSSL-for-iPhone/lib/libssl.a libssl openssl
  extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
-
-#extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
-#extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
+ #extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
+ #extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
 fi
 #aarch64-apple-ios aarch64-apple-ios-sim aarch64-apple-darwin \
  #        x86_64-apple-ios x86_64-apple-darwin
 # Build static libs
 ARCHS="aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios"
 
-if [ $BUILD_TYPE == "macos" ]; then
+if [ "$BUILD_TYPE" == "macos" ]; then
   ARCHS="aarch64-apple-darwin x86_64-apple-darwin"
 fi
 
-for TARGET in x86_64-apple-ios
+for TARGET in $ARCHS
 do
     echo "#############################"
     pwd
     echo "#############################"
-    rustup target add $TARGET
+    rustup target add "$TARGET"
 
     export OPENSSL_DIR=/opt/local
     export OPENSSL_INCLUDE_DIR=/opt/local/include/
@@ -126,34 +125,34 @@ do
     export PKG_CONFIG_SYSROOT_DIR=/
     export RUST_BACKTRACE=1
 
-    if [ $TARGET == "aarch64-apple-ios" ]; then
-      export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl/arm64
-      export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneOS16.2-arm64.sdk/include
-    fi
-    if [ $TARGET == "aarch64-apple-ios-sim" ]; then
-      export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl-sim/arm64
-      #export OPENSSL_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/OpenSSL-for-iPhone/include
-      export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-arm64.sdk/include
-      #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/arm64
-      #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/dist/ios/include
-      export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/lib
-      export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/include
-      #unset LIBZMQ_INCLUDE_DIR
-    fi
-    if [ $TARGET == "x86_64-apple-ios" ]; then
-        echo "###########################"
-        echo "Inside....."
-        echo "###########################"
-        #export OPENSSL_DIR=/opt/local
-        #export OPENSSL_INCLUDE_DIR=/opt/local/include/
-        #export OPENSSL_LIB_DIR=/opt/local/lib/
-        export OPENSSL_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/openssl/x86_64/
-        export OPENSSL_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
-        #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/x86_64
-        #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/dist/ios/include
-        export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-x86_64/lib
-        export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-x86_64/include
-    fi
+#    if [ $TARGET == "aarch64-apple-ios" ]; then
+#      export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl/arm64
+#      export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneOS16.2-arm64.sdk/include
+#    fi
+#    if [ $TARGET == "aarch64-apple-ios-sim" ]; then
+#      export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl-sim/arm64
+#      #export OPENSSL_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/OpenSSL-for-iPhone/include
+#      export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-arm64.sdk/include
+#      #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/arm64
+#      #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/dist/ios/include
+#      export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/lib
+#      export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/include
+#      #unset LIBZMQ_INCLUDE_DIR
+#    fi
+#    if [ $TARGET == "x86_64-apple-ios" ]; then
+#        echo "###########################"
+#        echo "Inside....."
+#        echo "###########################"
+#        #export OPENSSL_DIR=/opt/local
+#        #export OPENSSL_INCLUDE_DIR=/opt/local/include/
+#        #export OPENSSL_LIB_DIR=/opt/local/lib/
+#        export OPENSSL_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/openssl/x86_64/
+#        export OPENSSL_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
+#        export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/lib
+#        export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/include
+#        export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/libzmq/builds/ios/libzmq_build/x86_64/lib
+#        export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/libzmq/builds/ios/libzmq_build/x86_64/include
+#    fi
 
     cargo build -r --target=$TARGET
 done

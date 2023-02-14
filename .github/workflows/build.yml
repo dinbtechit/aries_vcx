@@ -88,6 +88,8 @@ jobs:
       - uses: bluefireteam/melos-action@v2
       - name: Chocolatey Action
         uses: crazy-max/ghaction-chocolatey@v2.1.0
+        with:
+          args: -h
       - uses: KyleMayes/install-llvm-action@v1
         with:
           version: "15"

@@ -104,7 +104,7 @@ jobs:
           cp platform-build/AriesVcx-windows.tar.gz packages/flutter_aries_vcx/windows/$CURR_VERSION.tar.gz
           echo Copied file!
           ls -la target
-          
+          choco install openssl
 
 #      - name: Run Flutter integration tests
 #        working-directory: packages/flutter_aries_vcx/example

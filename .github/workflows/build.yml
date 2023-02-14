@@ -151,17 +151,24 @@ jobs:
         run: flutter test -d linux integration_test
 
   ios_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v3
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2.2.0
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/melos-action@v2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-
+      - name: Install Aries VCX Dependencies
+        run: |
+          wget https://github.com/macports/macports-base/releases/download/v2.8.0/MacPorts-2.8.0-12-Monterey.pkg
+          sudo installer -pkg ./MacPorts-2.8.0-12-Monterey.pkg -target /
+          export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+          sudo port install openssl +universal zmq +universal
       - name: Start iOS Simulator
         run: |
           DEVICE_ID=$(xcrun xctrace list devices | grep iPhone | head -1 | awk '{print $NF}' | tr -d '()')
@@ -169,12 +176,7 @@ jobs:
           xcrun simctl boot $DEVICE_ID
 
       - name: Build the XCFramework
-        run: |
-          wget https://github.com/macports/macports-base/releases/download/v2.8.0/MacPorts-2.8.0-12-Monterey.pkg
-          sudo installer -pkg ./MacPorts-2.8.0-12-Monterey.pkg -target /
-          export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-          sudo port install openssl +universal zmq +universal
-          melos run build:apple
+        run: melos run build:apple
       - name: Copy the XCFramework to the needed location
         run: |
           CURR_VERSION=aries_vcx-v`awk '/^version: /{print $2}' packages/aries_vcx/pubspec.yaml`

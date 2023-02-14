@@ -87,7 +87,7 @@ extract_architectures() {
     popd
 }
 
-if [ "$BUILD_TYPE" != "macos" ]; then
+if [ "$BUILD_TYPE" == "ios" ]; then
  build_libzmq
  build_libsodium
  build_crypto
@@ -127,16 +127,16 @@ do
 
 #    if [ $TARGET == "aarch64-apple-ios" ]; then
 #      export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl/arm64
-#      export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneOS16.2-arm64.sdk/include
+#      #export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneOS16.2-arm64.sdk/include
 #    fi
 #    if [ $TARGET == "aarch64-apple-ios-sim" ]; then
 #      export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl-sim/arm64
 #      #export OPENSSL_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/OpenSSL-for-iPhone/include
-#      export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-arm64.sdk/include
-#      #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/arm64
+#      #export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-arm64.sdk/include
+#      export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/sodium/arm64
 #      #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/dist/ios/include
 #      export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/lib
-#      export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/include
+#      #export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libzmq-ios/build/iOS-arm64-sim/include
 #      #unset LIBZMQ_INCLUDE_DIR
 #    fi
 #    if [ $TARGET == "x86_64-apple-ios" ]; then
@@ -149,14 +149,15 @@ do
 #        export OPENSSL_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/output/libs/openssl/x86_64/
 #        export OPENSSL_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
 #        export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/lib
-#        export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/include
+#        #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/include
 #        export LIBZMQ_LIB_DIR=/Users/srinivad/code/personal/libzmq/builds/ios/libzmq_build/x86_64/lib
-#        export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/libzmq/builds/ios/libzmq_build/x86_64/include
+#        #export LIBZMQ_INCLUDE_DIR=/Users/srinivad/code/personal/libzmq/builds/ios/libzmq_build/x86_64/include
 #    fi
 
     cargo build -r --target=$TARGET
 done
 
+exit 0
 
 # Create XCFramework zip
 FRAMEWORK="AriesVcx.xcframework"

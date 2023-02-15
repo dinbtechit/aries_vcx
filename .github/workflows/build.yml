@@ -188,7 +188,7 @@ jobs:
 #        run: flutter test -d ${{ env.DEVICE_ID }} integration_test
 
   android_integration_test:
-    #if: github.repository == 'disabled'
+    if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:

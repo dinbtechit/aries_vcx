@@ -150,8 +150,6 @@ do
         #export OPENSSL_LIB_DIR=/opt/local/lib/
         export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl/x86_64
         export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
-        unset SODIUM_LIB_DIR
-        unset SODIUM_INCLUDE_DIR
         #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/lib
         #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/include
 #        if [ "$(uname -m)" == "arm64" ];then

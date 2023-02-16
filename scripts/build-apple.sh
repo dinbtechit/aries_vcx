@@ -87,16 +87,16 @@ extract_architectures() {
     popd
 }
 
-if [ "$BUILD_TYPE" == "ios" ]; then
- build_libzmq
- build_libsodium
+if [ "$BUILD_TYPE" == "macos" ]; then
+ #build_libzmq
+ #build_libsodium
  build_crypto
- extract_architectures ../../libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
- extract_architectures ../../libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
- extract_architectures ../../OpenSSL-for-iPhone/lib/libssl.a libssl openssl
- extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
- extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
- extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
+ #extract_architectures ../../libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
+ #extract_architectures ../../libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
+ extract_architectures $(pwd)/OpenSSL-for-iPhone/lib/libssl.a libssl openssl
+ extract_architectures $(pwd)/OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
+ #extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
+ #extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
 fi
 #aarch64-apple-ios aarch64-apple-ios-sim aarch64-apple-darwin \
  #        x86_64-apple-ios x86_64-apple-darwin
@@ -104,7 +104,7 @@ fi
 ARCHS="aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios"
 
 if [ "$BUILD_TYPE" == "macos" ]; then
-  ARCHS="aarch64-apple-darwin x86_64-apple-darwin"
+  ARCHS="aarch64-apple-darwin x86_64-apple-darwin x86_64-apple-ios aarch64-apple-ios"
 fi
 
 for TARGET in $ARCHS
@@ -154,10 +154,10 @@ do
         unset SODIUM_INCLUDE_DIR
         #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/lib
         #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/include
-        if [ "$(uname -m)" == "arm64" ];then
-         export LIBZMQ_LIB_DIR=$(pwd)/output/libs/zmq/x86_64
-         export LIBZMQ_INCLUDE_DIR=$(pwd)/libzmq-ios/dist/ios/include
-        fi
+#        if [ "$(uname -m)" == "arm64" ];then
+#         export LIBZMQ_LIB_DIR=$(pwd)/output/libs/zmq/x86_64
+#         export LIBZMQ_INCLUDE_DIR=$(pwd)/libzmq-ios/dist/ios/include
+#        fi
 
     fi
 

@@ -119,8 +119,8 @@ do
     #export OPENSSL_DIR=/opt/local
     #export OPENSSL_INCLUDE_DIR=/opt/local/include/
     #export OPENSSL_LIB_DIR=/opt/local/lib/
-    #export SODIUM_LIB_DIR=/opt/local/lib/
-    #export SODIUM_INCLUDE_DIR=/opt/local/include
+    export SODIUM_LIB_DIR=/opt/local/lib/
+    export SODIUM_INCLUDE_DIR=/opt/local/include
     export LIBZMQ_LIB_DIR=/opt/local/lib/
     export LIBZMQ_INCLUDE_DIR=/opt/local/include
     export PKG_CONFIG_ALLOW_CROSS=1

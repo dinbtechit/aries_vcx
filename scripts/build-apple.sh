@@ -32,7 +32,9 @@ build_libsodium() {
     fi
 
     pushd libsodium-ios
-    ./libsodium.rb
+      git checkout -- libsodium.rb
+      git apply --ignore-space-change --ignore-whitespace ../../$SCRIPT_DIR/ios/libsodium.patch
+      ./libsodium.rb
     popd
 
     # Check there is a fat file libsodium.a
@@ -89,13 +91,13 @@ extract_architectures() {
 
 if [ "$BUILD_TYPE" == "macos" ]; then
  build_crypto
- #build_libsodium
- #build_libzmq
+ build_libsodium
+ build_libzmq
 
+ extract_architectures "$(pwd)"/libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
+ extract_architectures "$(pwd)"/libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
  extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libssl.a libssl openssl
  extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
- #extract_architectures "$(pwd)"/libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
- #extract_architectures "$(pwd)"/libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
  #extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
  #extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
 fi
@@ -153,11 +155,11 @@ do
         BASE_DIR=$(dirname "$(pwd)")
         export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl/x86_64
         export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
-        export SODIUM_LIB_DIR=$BASE_DIR/libs/apple/ios/sodium/x86_64/lib
-        export SODIUM_INCLUDE_DIR=$BASE_DIR/libs/apple/ios/sodium/x86_64/include
+        export SODIUM_LIB_DIR=$(pwd)/output/libs/sodium/x86_64
+        export SODIUM_INCLUDE_DIR=$(pwd)/libsodium-ios/dist/ios/include
 #        if [ "$(uname -m)" == "arm64" ];then
-          export LIBZMQ_LIB_DIR=$BASE_DIR/libs/apple/ios/zmq/x86_64/lib
-          export LIBZMQ_INCLUDE_DIR=$BASE_DIR/libs/apple/ios/zmq/x86_64/include
+          export LIBZMQ_LIB_DIR=$(pwd)/output/libs/zmq/x86_64
+          export LIBZMQ_INCLUDE_DIR=$(pwd)/libzmq-ios/dist/ios/include
 #        fi
 
     fi

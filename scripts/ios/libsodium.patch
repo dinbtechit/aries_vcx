@@ -1,0 +1,19 @@
+diff --git a/libsodium.rb b/libsodium.rb
+index 6032c7c..3a50ddb 100755
+--- a/libsodium.rb
++++ b/libsodium.rb
+@@ -57,10 +57,10 @@ WATCHOS_VERSION_MIN     = 2.0
+ 
+ LIBNAME                 = "libsodium.a"
+ VALID_ARHS_PER_PLATFORM = {
+-  "iOS"     => ["armv7", "armv7s", "arm64", "i386", "x86_64"],
+-  "macOS"   => ["x86_64"],
+-  "tvOS"    => ["arm64", "x86_64"],
+-  "watchOS" => ["armv7k", "i386"],
++  "iOS"     => ["x86_64"],
++  "macOS"   => [],
++  "tvOS"    => [],
++  "watchOS" => [],
+ }
+ DEVELOPER               = `xcode-select -print-path`.chomp
+ LIPO                    = `xcrun -sdk iphoneos -find lipo`.chomp

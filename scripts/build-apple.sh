@@ -88,13 +88,13 @@ extract_architectures() {
 }
 
 if [ "$BUILD_TYPE" == "macos" ]; then
- #build_libzmq
- #build_libsodium
+ build_libzmq
+ build_libsodium
  build_crypto
- #extract_architectures ../../libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
- #extract_architectures ../../libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
- extract_architectures $(pwd)/OpenSSL-for-iPhone/lib/libssl.a libssl openssl
- extract_architectures $(pwd)/OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
+ extract_architectures "$(pwd)"/libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
+ extract_architectures "$(pwd)"/libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
+ extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libssl.a libssl openssl
+ extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
  #extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
  #extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
 fi
@@ -150,11 +150,11 @@ do
         #export OPENSSL_LIB_DIR=/opt/local/lib/
         export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl/x86_64
         export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
-        #export SODIUM_LIB_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/lib
-        #export SODIUM_INCLUDE_DIR=/Users/srinivad/code/personal/aries_vcx/platform-build/libsodium-ios/build/iOS-x86_64/include
+        export SODIUM_LIB_DIR=$(pwd)/libsodium-ios/build/iOS-x86_64/lib
+        export SODIUM_INCLUDE_DIR$(pwd)/libsodium-ios/build/iOS-x86_64/include
 #        if [ "$(uname -m)" == "arm64" ];then
-#         export LIBZMQ_LIB_DIR=$(pwd)/output/libs/zmq/x86_64
-#         export LIBZMQ_INCLUDE_DIR=$(pwd)/libzmq-ios/dist/ios/include
+         export LIBZMQ_LIB_DIR=$(pwd)/output/libs/zmq/x86_64
+         export LIBZMQ_INCLUDE_DIR=$(pwd)/libzmq-ios/dist/ios/include
 #        fi
 
     fi

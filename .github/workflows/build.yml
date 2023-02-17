@@ -66,10 +66,6 @@ jobs:
         uses: Swatinem/rust-cache@v2.2.0
       - name: Install Aries VCX Dependencies
         run: |
-#          wget https://github.com/macports/macports-base/releases/download/v2.8.0/MacPorts-2.8.0-12-Monterey.pkg
-#          sudo installer -pkg ./MacPorts-2.8.0-12-Monterey.pkg -target /
-#          export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-#          sudo port install openssl +universal zmq +universal
            which pkg-config &>/dev/null || brew install pkg-config        
            which automake &>/dev/null || brew install automake
            which autoconf &>/dev/null || brew install autoconf

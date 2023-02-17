@@ -30,8 +30,7 @@ flutter pub add flutter_aries_vcx
 
 ```dart
 // with flutter (flutter_aries_vcx)
-final instance = await
-AriesVcx.defaultInstance;
+final instance = await AriesVcx.defaultInstance;
 
 // Dart-only (just aries_vcx)
 final instance = AriesVcx.getInstance(

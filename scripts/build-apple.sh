@@ -119,10 +119,10 @@ do
     #export OPENSSL_DIR=/opt/local
     #export OPENSSL_INCLUDE_DIR=/opt/local/include/
     #export OPENSSL_LIB_DIR=/opt/local/lib/
-    export SODIUM_LIB_DIR=/opt/local/lib/
-    export SODIUM_INCLUDE_DIR=/opt/local/include
-    export LIBZMQ_LIB_DIR=/opt/local/lib/
-    export LIBZMQ_INCLUDE_DIR=/opt/local/include
+    #export SODIUM_LIB_DIR=/opt/local/lib/
+    #export SODIUM_INCLUDE_DIR=/opt/local/include
+    #export LIBZMQ_LIB_DIR=/opt/local/lib/
+    #export LIBZMQ_INCLUDE_DIR=/opt/local/include
     export PKG_CONFIG_ALLOW_CROSS=1
     export PKG_CONFIG_SYSROOT_DIR=/
     export RUST_BACKTRACE=1
@@ -153,11 +153,11 @@ do
         BASE_DIR=$(dirname "$(pwd)")
         export OPENSSL_LIB_DIR=$(pwd)/output/libs/openssl/x86_64
         export OPENSSL_INCLUDE_DIR=$(pwd)/OpenSSL-for-iPhone/bin/iPhoneSimulator16.2-x86_64.sdk/include
-        #export SODIUM_LIB_DIR=$BASE_DIR/libs/apple/ios/sodium/x86_64/lib
-        #export SODIUM_INCLUDE_DIR=$BASE_DIR/libs/apple/ios/sodium/x86_64/include
+        export SODIUM_LIB_DIR=$BASE_DIR/libs/apple/ios/sodium/x86_64/lib
+        export SODIUM_INCLUDE_DIR=$BASE_DIR/libs/apple/ios/sodium/x86_64/include
 #        if [ "$(uname -m)" == "arm64" ];then
-         #export LIBZMQ_LIB_DIR=$BASE_DIR/libs/apple/ios/zmq/x86_64/lib
-         #export LIBZMQ_INCLUDE_DIR=$BASE_DIR/libs/apple/ios/zmq/x86_64/include
+          export LIBZMQ_LIB_DIR=$BASE_DIR/libs/apple/ios/zmq/x86_64/lib
+          export LIBZMQ_INCLUDE_DIR=$BASE_DIR/libs/apple/ios/zmq/x86_64/include
 #        fi
 
     fi

@@ -13,32 +13,34 @@ build_libzmq() {
     echo "ios/ci/build.sh: running build_libzmq()"
     if [ ! -d libzmq-ios ]; then
         git clone https://github.com/evernym/libzmq-ios.git libzmq-ios
-    fi
-    pushd libzmq-ios
-      git restore .
-    popd
 
-    pushd libzmq-ios
-        git checkout -- libzmq.rb
-        git apply --ignore-space-change --ignore-whitespace ../../$SCRIPT_DIR/ios/libzmq.rb.patch
-        ./libzmq.rb
-    popd
+      pushd libzmq-ios
+        git restore .
+      popd
+
+      pushd libzmq-ios
+          git checkout -- libzmq.rb
+          git apply --ignore-space-change --ignore-whitespace ../../$SCRIPT_DIR/ios/libzmq.rb.patch
+          ./libzmq.rb
+      popd
+    fi
 }
 
 # Build libsodium
 build_libsodium() {
     if [ ! -d libsodium-ios ]; then
         git clone https://github.com/evernym/libsodium-ios.git libsodium-ios
+
+
+      pushd libsodium-ios
+        git checkout -- libsodium.rb
+        git apply --ignore-space-change --ignore-whitespace ../../$SCRIPT_DIR/ios/libsodium.patch
+        ./libsodium.rb
+      popd
+
+      # Check there is a fat file libsodium.a
+      lipo -info libsodium-ios/dist/ios/lib/libsodium.a
     fi
-
-    pushd libsodium-ios
-      git checkout -- libsodium.rb
-      git apply --ignore-space-change --ignore-whitespace ../../$SCRIPT_DIR/ios/libsodium.patch
-      ./libsodium.rb
-    popd
-
-    # Check there is a fat file libsodium.a
-    lipo -info libsodium-ios/dist/ios/lib/libsodium.a
 }
 
 build_crypto() {
@@ -47,18 +49,18 @@ build_crypto() {
         cd OpenSSL-for-iPhone
         git checkout b77ace70b2594de69c88d0748326d2a1190bbac1
         cd -
+
+      pushd OpenSSL-for-iPhone
+      OPENSSL_VERSION=1.1.1s
+      ./build-libssl.sh --version=$OPENSSL_VERSION
+      popd
+
+      # Check there is a fat file libssl.a
+      lipo -info OpenSSL-for-iPhone/lib/libssl.a
+
+      # Check there is a fat file libcrypto.a
+      lipo -info OpenSSL-for-iPhone/lib/libcrypto.a
     fi
-
-    pushd OpenSSL-for-iPhone
-    OPENSSL_VERSION=1.1.1s
-    ./build-libssl.sh --version=$OPENSSL_VERSION
-    popd
-
-    # Check there is a fat file libssl.a
-    lipo -info OpenSSL-for-iPhone/lib/libssl.a
-
-    # Check there is a fat file libcrypto.a
-    lipo -info OpenSSL-for-iPhone/lib/libcrypto.a
 }
 
 extract_architectures() {
@@ -91,15 +93,15 @@ extract_architectures() {
 
 if [ "$BUILD_TYPE" == "macos" ]; then
  build_crypto
- build_libsodium
- build_libzmq
+ #build_libsodium
+ #build_libzmq
 
  extract_architectures "$(pwd)"/libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
  extract_architectures "$(pwd)"/libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
  extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libssl.a libssl openssl
  extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
- #extract_architectures ../../OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
- #extract_architectures ../../OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
+ #extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim
+ #extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libcrypto-iOS-Sim.a libcrypto openssl-sim
 fi
 #aarch64-apple-ios aarch64-apple-ios-sim aarch64-apple-darwin \
  #        x86_64-apple-ios x86_64-apple-darwin
@@ -107,8 +109,8 @@ fi
 ARCHS="aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios"
 
 if [ "$BUILD_TYPE" == "macos" ]; then
-  #ARCHS="aarch64-apple-darwin x86_64-apple-darwin x86_64-apple-ios aarch64-apple-ios"
-  ARCHS="x86_64-apple-ios"
+  ARCHS="aarch64-apple-darwin x86_64-apple-darwin aarch64-apple-ios"
+  #ARCHS="x86_64-apple-ios"
 fi
 
 for TARGET in $ARCHS
@@ -118,13 +120,13 @@ do
     echo "#############################"
     rustup target add "$TARGET"
 
-    #export OPENSSL_DIR=/opt/local
-    #export OPENSSL_INCLUDE_DIR=/opt/local/include/
-    #export OPENSSL_LIB_DIR=/opt/local/lib/
-    #export SODIUM_LIB_DIR=/opt/local/lib/
-    #export SODIUM_INCLUDE_DIR=/opt/local/include
-    #export LIBZMQ_LIB_DIR=/opt/local/lib/
-    #export LIBZMQ_INCLUDE_DIR=/opt/local/include
+    export OPENSSL_DIR=/opt/local
+    export OPENSSL_INCLUDE_DIR=/opt/local/include/
+    export OPENSSL_LIB_DIR=/opt/local/lib/
+    export SODIUM_LIB_DIR=/opt/local/lib/
+    export SODIUM_INCLUDE_DIR=/opt/local/include
+    export LIBZMQ_LIB_DIR=/opt/local/lib/
+    export LIBZMQ_INCLUDE_DIR=/opt/local/include
     export PKG_CONFIG_ALLOW_CROSS=1
     export PKG_CONFIG_SYSROOT_DIR=/
     export RUST_BACKTRACE=1
@@ -167,7 +169,6 @@ do
     cargo build -r --target=$TARGET
 done
 
-exit 0
 
 # Create XCFramework zip
 FRAMEWORK="AriesVcx.xcframework"
@@ -175,14 +176,18 @@ LIBNAME=libaries_vcx.a
 mkdir mac-lipo ios-sim-lipo
 IOS_SIM_LIPO=ios-sim-lipo/$LIBNAME
 MAC_LIPO=mac-lipo/$LIBNAME
-lipo -create -output $IOS_SIM_LIPO \
-        ../target/aarch64-apple-ios-sim/release/$LIBNAME \
-        ../target/x86_64-apple-ios/release/$LIBNAME
+#lipo -create -output $IOS_SIM_LIPO \
+#        ../target/aarch64-apple-ios-sim/release/$LIBNAME \
+#        ../target/x86_64-apple-ios/release/$LIBNAME
 lipo -create -output $MAC_LIPO \
         ../target/aarch64-apple-darwin/release/$LIBNAME \
         ../target/x86_64-apple-darwin/release/$LIBNAME
+#xcodebuild -create-xcframework \
+#        -library $IOS_SIM_LIPO \
+#        -library $MAC_LIPO \
+#        -library ../target/aarch64-apple-ios/release/$LIBNAME \
+#        -output $FRAMEWORK
 xcodebuild -create-xcframework \
-        -library $IOS_SIM_LIPO \
         -library $MAC_LIPO \
         -library ../target/aarch64-apple-ios/release/$LIBNAME \
         -output $FRAMEWORK

@@ -13,7 +13,7 @@ on:
 jobs:
   # General build, check, and test steps
   build_and_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: ubuntu-latest
 
     steps:
@@ -87,7 +87,7 @@ jobs:
 #        run: flutter test -d macos integration_test
 
   windows_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: windows-latest
 
     steps:
@@ -123,7 +123,7 @@ jobs:
 #        run: flutter test -d windows integration_test
 
   linux_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: ubuntu-latest
 
     steps:
@@ -155,7 +155,7 @@ jobs:
         run: flutter test -d linux integration_test
 
   ios_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:
@@ -192,7 +192,7 @@ jobs:
 #        run: flutter test -d ${{ env.DEVICE_ID }} integration_test
 
   android_integration_test:
-    if: github.repository == 'disabled'
+    #if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:

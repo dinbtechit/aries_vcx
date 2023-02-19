@@ -96,8 +96,8 @@ if [ "$BUILD_TYPE" == "macos" ]; then
  #build_libsodium
  #build_libzmq
 
- extract_architectures "$(pwd)"/libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
- extract_architectures "$(pwd)"/libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
+ #extract_architectures "$(pwd)"/libzmq-ios/dist/ios/lib/libzmq.a libzmq zmq
+ #extract_architectures "$(pwd)"/libsodium-ios/dist/ios/lib/libsodium.a libsodium sodium
  extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libssl.a libssl openssl
  extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libcrypto.a libcrypto openssl
  #extract_architectures "$(pwd)"/OpenSSL-for-iPhone/lib/libssl-iOS-Sim.a libssl openssl-sim

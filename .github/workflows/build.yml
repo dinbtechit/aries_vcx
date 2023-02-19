@@ -66,14 +66,10 @@ jobs:
         uses: Swatinem/rust-cache@v2.2.0
       - name: Install Aries VCX Dependencies
         run: |
-           which pkg-config &>/dev/null || brew install pkg-config        
-           which automake &>/dev/null || brew install automake
-           which autoconf &>/dev/null || brew install autoconf
-           which cmake &>/dev/null || brew install cmake
-           which wget &>/dev/null || brew install wget
-           brew list openssl &>/dev/null || brew install openssl@1.1
-           brew list zmq &>/dev/null || brew install zmq
-           brew list libzip &>/dev/null || brew install libzip
+          wget https://github.com/macports/macports-base/releases/download/v2.8.0/MacPorts-2.8.0-12-Monterey.pkg
+          sudo installer -pkg ./MacPorts-2.8.0-12-Monterey.pkg -target /
+          export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+          sudo port install openssl +universal zmq +universal
       - name: Build the XCFramework
         run: melos run build:macos
       - name: Copy the XCFramework to the needed location
@@ -155,7 +151,7 @@ jobs:
         run: flutter test -d linux integration_test
 
   ios_integration_test:
-    #if: github.repository == 'disabled'
+    if: github.repository == 'disabled'
     runs-on: macos-latest
 
     steps:

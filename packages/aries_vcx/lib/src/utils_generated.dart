@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'utils_generated.io.dart'
     if (dart.library.html) 'utils_generated.web.dart';
 
-abstract class UtilsFFI {
+abstract class Utils {
   Future<void> shutdown({bool? deleteAll, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kShutdownConstMeta;
@@ -24,15 +24,15 @@ abstract class UtilsFFI {
   FlutterRustBridgeTaskConstMeta get kGetVersionConstMeta;
 }
 
-class UtilsFFIImpl implements UtilsFFI {
-  final UtilsFFIPlatform _platform;
-  factory UtilsFFIImpl(ExternalLibrary dylib) =>
-      UtilsFFIImpl.raw(UtilsFFIPlatform(dylib));
+class UtilsImpl implements Utils {
+  final UtilsPlatform _platform;
+  factory UtilsImpl(ExternalLibrary dylib) =>
+      UtilsImpl.raw(UtilsPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory UtilsFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      UtilsFFIImpl(module as ExternalLibrary);
-  UtilsFFIImpl.raw(this._platform);
+  factory UtilsImpl.wasm(FutureOr<WasmModule> module) =>
+      UtilsImpl(module as ExternalLibrary);
+  UtilsImpl.raw(this._platform);
   Future<void> shutdown({bool? deleteAll, dynamic hint}) {
     var arg0 = _platform.api2wire_opt_box_autoadd_bool(deleteAll);
     return _platform.executeNormal(FlutterRustBridgeTask(

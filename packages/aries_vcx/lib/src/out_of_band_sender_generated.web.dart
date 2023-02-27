@@ -9,11 +9,10 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'out_of_band_sender_generated.dart';
 export 'out_of_band_sender_generated.dart';
 
-class OutOfBandSenderFFIPlatform
-    extends FlutterRustBridgeBase<OutOfBandSenderFFIWire>
+class OutOfBandSenderPlatform extends FlutterRustBridgeBase<OutOfBandSenderWire>
     with FlutterRustBridgeSetupMixin {
-  OutOfBandSenderFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(OutOfBandSenderFFIWire(dylib)) {
+  OutOfBandSenderPlatform(FutureOr<WasmModule> dylib)
+      : super(OutOfBandSenderWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -35,14 +34,13 @@ class OutOfBandSenderFFIPlatform
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external OutOfBandSenderFFIWasmModule get wasmModule;
+external OutOfBandSenderWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class OutOfBandSenderFFIWasmModule implements WasmModule {
+class OutOfBandSenderWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external OutOfBandSenderFFIWasmModule bind(
-      dynamic thisArg, String moduleName);
+  external OutOfBandSenderWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_out_of_band_sender_create(
       NativePortType port_, String config);
 
@@ -73,10 +71,10 @@ class OutOfBandSenderFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class OutOfBandSenderFFIWire
-    extends FlutterRustBridgeWasmWireBase<OutOfBandSenderFFIWasmModule> {
-  OutOfBandSenderFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<OutOfBandSenderFFIWasmModule>(module));
+class OutOfBandSenderWire
+    extends FlutterRustBridgeWasmWireBase<OutOfBandSenderWasmModule> {
+  OutOfBandSenderWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<OutOfBandSenderWasmModule>(module));
 
   void wire_out_of_band_sender_create(NativePortType port_, String config) =>
       wasmModule.wire_out_of_band_sender_create(port_, config);

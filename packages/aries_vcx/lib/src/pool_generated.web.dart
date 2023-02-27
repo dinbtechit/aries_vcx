@@ -9,9 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'pool_generated.dart';
 export 'pool_generated.dart';
 
-class PoolFFIPlatform extends FlutterRustBridgeBase<PoolFFIWire>
+class PoolPlatform extends FlutterRustBridgeBase<PoolWire>
     with FlutterRustBridgeSetupMixin {
-  PoolFFIPlatform(FutureOr<WasmModule> dylib) : super(PoolFFIWire(dylib)) {
+  PoolPlatform(FutureOr<WasmModule> dylib) : super(PoolWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -33,13 +33,13 @@ class PoolFFIPlatform extends FlutterRustBridgeBase<PoolFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external PoolFFIWasmModule get wasmModule;
+external PoolWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class PoolFFIWasmModule implements WasmModule {
+class PoolWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external PoolFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external PoolWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_open_main_pool(
       NativePortType port_, String pool_config);
 
@@ -48,9 +48,9 @@ class PoolFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class PoolFFIWire extends FlutterRustBridgeWasmWireBase<PoolFFIWasmModule> {
-  PoolFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<PoolFFIWasmModule>(module));
+class PoolWire extends FlutterRustBridgeWasmWireBase<PoolWasmModule> {
+  PoolWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<PoolWasmModule>(module));
 
   void wire_open_main_pool(NativePortType port_, String pool_config) =>
       wasmModule.wire_open_main_pool(port_, pool_config);

@@ -14,22 +14,22 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'agent_generated.io.dart'
     if (dart.library.html) 'agent_generated.web.dart';
 
-abstract class AgentFFI {
+abstract class Agent {
   Future<String> generatePublicInvitation(
       {required String publicDid, required String label, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kGeneratePublicInvitationConstMeta;
 }
 
-class AgentFFIImpl implements AgentFFI {
-  final AgentFFIPlatform _platform;
-  factory AgentFFIImpl(ExternalLibrary dylib) =>
-      AgentFFIImpl.raw(AgentFFIPlatform(dylib));
+class AgentImpl implements Agent {
+  final AgentPlatform _platform;
+  factory AgentImpl(ExternalLibrary dylib) =>
+      AgentImpl.raw(AgentPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory AgentFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      AgentFFIImpl(module as ExternalLibrary);
-  AgentFFIImpl.raw(this._platform);
+  factory AgentImpl.wasm(FutureOr<WasmModule> module) =>
+      AgentImpl(module as ExternalLibrary);
+  AgentImpl.raw(this._platform);
   Future<String> generatePublicInvitation(
       {required String publicDid, required String label, dynamic hint}) {
     var arg0 = _platform.api2wire_String(publicDid);

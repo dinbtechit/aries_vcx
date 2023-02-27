@@ -21,6 +21,38 @@ use std::sync::Arc;
 
 // Section: wire functions
 
+fn wire_out_of_band_receiver_create_impl(
+    port_: MessagePort,
+    msg: impl Wire2Api<String> + UnwindSafe,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "out_of_band_receiver_create",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || {
+            let api_msg = msg.wire2api();
+            move |task_callback| out_of_band_receiver_create(api_msg)
+        },
+    )
+}
+fn wire_out_of_band_receiver_extract_message_impl(
+    port_: MessagePort,
+    handle: impl Wire2Api<u32> + UnwindSafe,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "out_of_band_receiver_extract_message",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || {
+            let api_handle = handle.wire2api();
+            move |task_callback| out_of_band_receiver_extract_message(api_handle)
+        },
+    )
+}
 fn wire_out_of_band_receiver_connection_exists_impl(
     port_: MessagePort,
     handle: impl Wire2Api<u32> + UnwindSafe,
@@ -170,6 +202,16 @@ mod web {
     // Section: wire functions
 
     #[wasm_bindgen]
+    pub fn wire_out_of_band_receiver_create(port_: MessagePort, msg: String) {
+        wire_out_of_band_receiver_create_impl(port_, msg)
+    }
+
+    #[wasm_bindgen]
+    pub fn wire_out_of_band_receiver_extract_message(port_: MessagePort, handle: u32) {
+        wire_out_of_band_receiver_extract_message_impl(port_, handle)
+    }
+
+    #[wasm_bindgen]
     pub fn wire_out_of_band_receiver_connection_exists(
         port_: MessagePort,
         handle: u32,
@@ -262,6 +304,16 @@ mod io {
     // Section: wire functions
 
     #[no_mangle]
+    pub extern "C" fn wire_out_of_band_receiver_create(port_: i64, msg: *mut wire_uint_8_list) {
+        wire_out_of_band_receiver_create_impl(port_, msg)
+    }
+
+    #[no_mangle]
+    pub extern "C" fn wire_out_of_band_receiver_extract_message(port_: i64, handle: u32) {
+        wire_out_of_band_receiver_extract_message_impl(port_, handle)
+    }
+
+    #[no_mangle]
     pub extern "C" fn wire_out_of_band_receiver_connection_exists(
         port_: i64,
         handle: u32,
@@ -301,7 +353,7 @@ mod io {
     // Section: allocate functions
 
     #[no_mangle]
-    pub extern "C" fn new_uint_32_list_9(len: i32) -> *mut wire_uint_32_list {
+    pub extern "C" fn new_uint_32_list_8(len: i32) -> *mut wire_uint_32_list {
         let ans = wire_uint_32_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,
@@ -310,7 +362,7 @@ mod io {
     }
 
     #[no_mangle]
-    pub extern "C" fn new_uint_8_list_9(len: i32) -> *mut wire_uint_8_list {
+    pub extern "C" fn new_uint_8_list_8(len: i32) -> *mut wire_uint_8_list {
         let ans = wire_uint_8_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,

@@ -9,9 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'utils_generated.dart';
 export 'utils_generated.dart';
 
-class UtilsFFIPlatform extends FlutterRustBridgeBase<UtilsFFIWire>
+class UtilsPlatform extends FlutterRustBridgeBase<UtilsWire>
     with FlutterRustBridgeSetupMixin {
-  UtilsFFIPlatform(FutureOr<WasmModule> dylib) : super(UtilsFFIWire(dylib)) {
+  UtilsPlatform(FutureOr<WasmModule> dylib) : super(UtilsWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -33,13 +33,13 @@ class UtilsFFIPlatform extends FlutterRustBridgeBase<UtilsFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external UtilsFFIWasmModule get wasmModule;
+external UtilsWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class UtilsFFIWasmModule implements WasmModule {
+class UtilsWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external UtilsFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external UtilsWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_shutdown(
       NativePortType port_, bool? delete_all);
 
@@ -48,9 +48,9 @@ class UtilsFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class UtilsFFIWire extends FlutterRustBridgeWasmWireBase<UtilsFFIWasmModule> {
-  UtilsFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<UtilsFFIWasmModule>(module));
+class UtilsWire extends FlutterRustBridgeWasmWireBase<UtilsWasmModule> {
+  UtilsWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<UtilsWasmModule>(module));
 
   void wire_shutdown(NativePortType port_, bool? delete_all) =>
       wasmModule.wire_shutdown(port_, delete_all);

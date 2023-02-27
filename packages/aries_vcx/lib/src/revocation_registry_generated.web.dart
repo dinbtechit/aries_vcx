@@ -9,11 +9,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'revocation_registry_generated.dart';
 export 'revocation_registry_generated.dart';
 
-class RevocationRegistryFFIPlatform
-    extends FlutterRustBridgeBase<RevocationRegistryFFIWire>
+class RevocationRegistryPlatform
+    extends FlutterRustBridgeBase<RevocationRegistryWire>
     with FlutterRustBridgeSetupMixin {
-  RevocationRegistryFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(RevocationRegistryFFIWire(dylib)) {
+  RevocationRegistryPlatform(FutureOr<WasmModule> dylib)
+      : super(RevocationRegistryWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -53,13 +53,13 @@ class RevocationRegistryFFIPlatform
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external RevocationRegistryFFIWasmModule get wasmModule;
+external RevocationRegistryWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class RevocationRegistryFFIWasmModule implements WasmModule {
+class RevocationRegistryWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external RevocationRegistryFFIWasmModule bind(
+  external RevocationRegistryWasmModule bind(
       dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_revocation_registry_create(
       NativePortType port_, List<dynamic> config);
@@ -88,10 +88,10 @@ class RevocationRegistryFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class RevocationRegistryFFIWire
-    extends FlutterRustBridgeWasmWireBase<RevocationRegistryFFIWasmModule> {
-  RevocationRegistryFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<RevocationRegistryFFIWasmModule>(module));
+class RevocationRegistryWire
+    extends FlutterRustBridgeWasmWireBase<RevocationRegistryWasmModule> {
+  RevocationRegistryWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<RevocationRegistryWasmModule>(module));
 
   void wire_revocation_registry_create(
           NativePortType port_, List<dynamic> config) =>

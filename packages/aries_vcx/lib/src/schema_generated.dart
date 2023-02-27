@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'schema_generated.io.dart'
     if (dart.library.html) 'schema_generated.web.dart';
 
-abstract class SchemaFFI {
+abstract class Schema {
   Future<void> schemaGetAttributes(
       {required String sourceId, required String schemaId, dynamic hint});
 
@@ -58,15 +58,15 @@ abstract class SchemaFFI {
   FlutterRustBridgeTaskConstMeta get kSchemaGetStateConstMeta;
 }
 
-class SchemaFFIImpl implements SchemaFFI {
-  final SchemaFFIPlatform _platform;
-  factory SchemaFFIImpl(ExternalLibrary dylib) =>
-      SchemaFFIImpl.raw(SchemaFFIPlatform(dylib));
+class SchemaImpl implements Schema {
+  final SchemaPlatform _platform;
+  factory SchemaImpl(ExternalLibrary dylib) =>
+      SchemaImpl.raw(SchemaPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory SchemaFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      SchemaFFIImpl(module as ExternalLibrary);
-  SchemaFFIImpl.raw(this._platform);
+  factory SchemaImpl.wasm(FutureOr<WasmModule> module) =>
+      SchemaImpl(module as ExternalLibrary);
+  SchemaImpl.raw(this._platform);
   Future<void> schemaGetAttributes(
       {required String sourceId, required String schemaId, dynamic hint}) {
     var arg0 = _platform.api2wire_String(sourceId);

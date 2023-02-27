@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'disclosed_proof_generated.io.dart'
     if (dart.library.html) 'disclosed_proof_generated.web.dart';
 
-abstract class DisclosedProofFFI {
+abstract class DisclosedProof {
   Future<int> disclosedProofCreateWithRequest(
       {required String sourceId, required String proofReq, dynamic hint});
 
@@ -104,15 +104,15 @@ abstract class DisclosedProofFFI {
   FlutterRustBridgeTaskConstMeta get kDisclosedProofGetThreadIdConstMeta;
 }
 
-class DisclosedProofFFIImpl implements DisclosedProofFFI {
-  final DisclosedProofFFIPlatform _platform;
-  factory DisclosedProofFFIImpl(ExternalLibrary dylib) =>
-      DisclosedProofFFIImpl.raw(DisclosedProofFFIPlatform(dylib));
+class DisclosedProofImpl implements DisclosedProof {
+  final DisclosedProofPlatform _platform;
+  factory DisclosedProofImpl(ExternalLibrary dylib) =>
+      DisclosedProofImpl.raw(DisclosedProofPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory DisclosedProofFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      DisclosedProofFFIImpl(module as ExternalLibrary);
-  DisclosedProofFFIImpl.raw(this._platform);
+  factory DisclosedProofImpl.wasm(FutureOr<WasmModule> module) =>
+      DisclosedProofImpl(module as ExternalLibrary);
+  DisclosedProofImpl.raw(this._platform);
   Future<int> disclosedProofCreateWithRequest(
       {required String sourceId, required String proofReq, dynamic hint}) {
     var arg0 = _platform.api2wire_String(sourceId);

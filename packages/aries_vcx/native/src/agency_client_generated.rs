@@ -275,17 +275,17 @@ mod io {
     // Section: allocate functions
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_agency_client_config_1() -> *mut wire_AgencyClientConfig {
+    pub extern "C" fn new_box_autoadd_agency_client_config_0() -> *mut wire_AgencyClientConfig {
         support::new_leak_box_ptr(wire_AgencyClientConfig::new_with_null_ptr())
     }
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_agent_provision_config_1() -> *mut wire_AgentProvisionConfig {
+    pub extern "C" fn new_box_autoadd_agent_provision_config_0() -> *mut wire_AgentProvisionConfig {
         support::new_leak_box_ptr(wire_AgentProvisionConfig::new_with_null_ptr())
     }
 
     #[no_mangle]
-    pub extern "C" fn new_uint_8_list_1(len: i32) -> *mut wire_uint_8_list {
+    pub extern "C" fn new_uint_8_list_0(len: i32) -> *mut wire_uint_8_list {
         let ans = wire_uint_8_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,
@@ -412,6 +412,15 @@ mod io {
                 agent_seed: core::ptr::null_mut(),
             }
         }
+    }
+
+    // Section: sync execution mode utility
+
+    #[no_mangle]
+    pub extern "C" fn free_WireSyncReturn(ptr: support::WireSyncReturn) {
+        unsafe {
+            let _ = support::box_from_leak_ptr(ptr);
+        };
     }
 }
 #[cfg(not(target_family = "wasm"))]

@@ -14,21 +14,21 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'logging_generated.io.dart'
     if (dart.library.html) 'logging_generated.web.dart';
 
-abstract class LoggingFFI {
+abstract class Logging {
   Future<void> initDefaultLogger({String? pattern, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kInitDefaultLoggerConstMeta;
 }
 
-class LoggingFFIImpl implements LoggingFFI {
-  final LoggingFFIPlatform _platform;
-  factory LoggingFFIImpl(ExternalLibrary dylib) =>
-      LoggingFFIImpl.raw(LoggingFFIPlatform(dylib));
+class LoggingImpl implements Logging {
+  final LoggingPlatform _platform;
+  factory LoggingImpl(ExternalLibrary dylib) =>
+      LoggingImpl.raw(LoggingPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory LoggingFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      LoggingFFIImpl(module as ExternalLibrary);
-  LoggingFFIImpl.raw(this._platform);
+  factory LoggingImpl.wasm(FutureOr<WasmModule> module) =>
+      LoggingImpl(module as ExternalLibrary);
+  LoggingImpl.raw(this._platform);
   Future<void> initDefaultLogger({String? pattern, dynamic hint}) {
     var arg0 = _platform.api2wire_opt_String(pattern);
     return _platform.executeNormal(FlutterRustBridgeTask(

@@ -1,12 +1,12 @@
 use vcx::api_vcx::api_handle::out_of_band;
 
 
-fn out_of_band_receiver_create(msg: String) -> anyhow::Result<u32> {
+pub fn out_of_band_receiver_create(msg: String) -> anyhow::Result<u32> {
     out_of_band::create_out_of_band_msg_from_msg(&msg).map_err(anyhow::Error::from)
 }
 
 
-fn out_of_band_receiver_extract_message(handle: u32) -> anyhow::Result<String> {
+pub fn out_of_band_receiver_extract_message(handle: u32) -> anyhow::Result<String> {
     out_of_band::extract_a2a_message(handle).map_err(anyhow::Error::from)
 }
 

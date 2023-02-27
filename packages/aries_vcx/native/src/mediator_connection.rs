@@ -1,4 +1,4 @@
-use anyhow::Error;
+
 use vcx::api_vcx::api_handle::mediated_connection;
 pub use vcx::api_vcx::api_handle::mediated_connection::{MessageByConnection, parse_status_codes};
 pub use vcx::aries_vcx::agency_client::api::downloaded_message::DownloadedMessage;

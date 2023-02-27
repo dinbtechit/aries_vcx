@@ -3,18 +3,18 @@ use lib_flutter_rust_bridge_codegen::{
     config_parse, frb_codegen, get_symbols_if_no_duplicates, RawOpts,
 };
 
-const RUST_INPUT: &str = "src/api.rs";
-const DART_OUTPUT: &str = "../lib/src/bridge_generated.dart";
-const RUST_OUTPUT: &str = "src/bridge_generated.rs";
-const CLASS_NAME: &str = "AriesVcx";
-const IOS_C_OUTPUT: &str = "../../flutter_aries_vcx/ios/Classes/frb.h";
-const MACOS_C_OUTPUT: &str = "../../flutter_aries_vcx/macos/Classes/frb.h";
+// const RUST_INPUT: &str = "src/api.rs";
+// const DART_OUTPUT: &str = "../lib/src/bridge_generated.dart";
+// const RUST_OUTPUT: &str = "src/bridge_generated.rs";
+// const CLASS_NAME: &str = "AriesVcx";
+// const IOS_C_OUTPUT: &str = "../../flutter_aries_vcx/ios/Classes/frb.h";
+// const MACOS_C_OUTPUT: &str = "../../flutter_aries_vcx/macos/Classes/frb.h";
 
 
 const TEMPLATE_RUST_INPUT: &str = "src/$$TEMPLATE$$.rs";
 const TEMPLATE_DART_OUTPUT: &str = "../lib/src/$$TEMPLATE$$_generated.dart";
 const TEMPLATE_RUST_OUTPUT: &str = "src/$$TEMPLATE$$_generated.rs";
-const TEMPLATE_CLASS_NAME: &str = "$$TEMPLATE$$FFI";
+const TEMPLATE_CLASS_NAME: &str = "$$TEMPLATE$$";
 const TEMPLATE_IOS_C_OUTPUT: &str = "../../flutter_aries_vcx/ios/Classes/$$TEMPLATE$$.h";
 const TEMPLATE_MACOS_C_OUTPUT: &str = "../../flutter_aries_vcx/macos/Classes/$$TEMPLATE$$.h";
 
@@ -38,12 +38,12 @@ fn main() {
                                         "wallet",
     ];
 
-    let mut rust_inputs_files: Vec<String> = vec![RUST_INPUT.to_string()];
-    let mut dart_output_files: Vec<String> = vec![DART_OUTPUT.to_string()];
-    let mut rust_output_files: Vec<String> = vec![RUST_OUTPUT.to_string()];
-    let mut class_names: Vec<String> = vec![CLASS_NAME.to_string()];
-    let mut ios_c_output_files: Vec<String> = vec![IOS_C_OUTPUT.to_string()];
-    let mut macos_c_files: Vec<String> = vec![MACOS_C_OUTPUT.to_string()];
+    let mut rust_inputs_files: Vec<String> = vec![];
+    let mut dart_output_files: Vec<String> = vec![];
+    let mut rust_output_files: Vec<String> = vec![];
+    let mut class_names: Vec<String> = vec![];
+    let mut ios_c_output_files: Vec<String> = vec![];
+    let mut macos_c_files: Vec<String> = vec![];
 
     for name in list_of_files.iter() {
 

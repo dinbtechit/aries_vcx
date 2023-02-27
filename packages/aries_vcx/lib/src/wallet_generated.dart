@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'wallet_generated.io.dart'
     if (dart.library.html) 'wallet_generated.web.dart';
 
-abstract class WalletFFI {
+abstract class Wallet {
   Future<int> walletOpenAsMain(
       {required WalletConfig walletConfig, dynamic hint});
 
@@ -131,15 +131,15 @@ class WalletConfig {
   });
 }
 
-class WalletFFIImpl implements WalletFFI {
-  final WalletFFIPlatform _platform;
-  factory WalletFFIImpl(ExternalLibrary dylib) =>
-      WalletFFIImpl.raw(WalletFFIPlatform(dylib));
+class WalletImpl implements Wallet {
+  final WalletPlatform _platform;
+  factory WalletImpl(ExternalLibrary dylib) =>
+      WalletImpl.raw(WalletPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory WalletFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      WalletFFIImpl(module as ExternalLibrary);
-  WalletFFIImpl.raw(this._platform);
+  factory WalletImpl.wasm(FutureOr<WasmModule> module) =>
+      WalletImpl(module as ExternalLibrary);
+  WalletImpl.raw(this._platform);
   Future<int> walletOpenAsMain(
       {required WalletConfig walletConfig, dynamic hint}) {
     var arg0 = _platform.api2wire_box_autoadd_wallet_config(walletConfig);

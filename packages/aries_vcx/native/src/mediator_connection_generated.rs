@@ -955,7 +955,7 @@ mod io {
     // Section: allocate functions
 
     #[no_mangle]
-    pub extern "C" fn new_uint_32_list_8(len: i32) -> *mut wire_uint_32_list {
+    pub extern "C" fn new_uint_32_list_7(len: i32) -> *mut wire_uint_32_list {
         let ans = wire_uint_32_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,
@@ -964,7 +964,7 @@ mod io {
     }
 
     #[no_mangle]
-    pub extern "C" fn new_uint_8_list_8(len: i32) -> *mut wire_uint_8_list {
+    pub extern "C" fn new_uint_8_list_7(len: i32) -> *mut wire_uint_8_list {
         let ans = wire_uint_8_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,

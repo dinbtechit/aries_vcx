@@ -2,9 +2,9 @@ use vcx::api_vcx::api_global::settings::settings_init_issuer_config;
 use vcx::api_vcx::api_global::{ledger, wallet};
 pub use vcx::aries_vcx::indy::wallet::{IssuerConfig, RestoreWalletConfigs, WalletConfig};
 pub use vcx::aries_vcx::protocols::connection::pairwise_info::PairwiseInfo;
-use vcx::errors::error::{LibvcxError, LibvcxErrorKind};
-use vcx::serde_json;
-use vcx::serde_json::json;
+
+
+
 use flutter_rust_bridge::frb;
 
 #[frb(mirror(WalletConfig))]

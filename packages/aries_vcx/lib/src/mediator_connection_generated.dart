@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'mediator_connection_generated.io.dart'
     if (dart.library.html) 'mediator_connection_generated.web.dart';
 
-abstract class MediatorConnectionFFI {
+abstract class MediatorConnection {
   Future<String> mediatedConnectionGeneratePublicInvite(
       {required String publicDid, required String label, dynamic hint});
 
@@ -157,15 +157,15 @@ abstract class MediatorConnectionFFI {
       get kMediatedConnectionVerifySignatureConstMeta;
 }
 
-class MediatorConnectionFFIImpl implements MediatorConnectionFFI {
-  final MediatorConnectionFFIPlatform _platform;
-  factory MediatorConnectionFFIImpl(ExternalLibrary dylib) =>
-      MediatorConnectionFFIImpl.raw(MediatorConnectionFFIPlatform(dylib));
+class MediatorConnectionImpl implements MediatorConnection {
+  final MediatorConnectionPlatform _platform;
+  factory MediatorConnectionImpl(ExternalLibrary dylib) =>
+      MediatorConnectionImpl.raw(MediatorConnectionPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory MediatorConnectionFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      MediatorConnectionFFIImpl(module as ExternalLibrary);
-  MediatorConnectionFFIImpl.raw(this._platform);
+  factory MediatorConnectionImpl.wasm(FutureOr<WasmModule> module) =>
+      MediatorConnectionImpl(module as ExternalLibrary);
+  MediatorConnectionImpl.raw(this._platform);
   Future<String> mediatedConnectionGeneratePublicInvite(
       {required String publicDid, required String label, dynamic hint}) {
     var arg0 = _platform.api2wire_String(publicDid);

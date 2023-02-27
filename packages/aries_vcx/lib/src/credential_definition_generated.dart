@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'credential_definition_generated.io.dart'
     if (dart.library.html) 'credential_definition_generated.web.dart';
 
-abstract class CredentialDefinitionFFI {
+abstract class CredentialDefinition {
   Future<int> credentialdefCreateV2(
       {required String sourceId,
       required String schemaId,
@@ -54,15 +54,15 @@ abstract class CredentialDefinitionFFI {
   FlutterRustBridgeTaskConstMeta get kCredentialdefGetStateConstMeta;
 }
 
-class CredentialDefinitionFFIImpl implements CredentialDefinitionFFI {
-  final CredentialDefinitionFFIPlatform _platform;
-  factory CredentialDefinitionFFIImpl(ExternalLibrary dylib) =>
-      CredentialDefinitionFFIImpl.raw(CredentialDefinitionFFIPlatform(dylib));
+class CredentialDefinitionImpl implements CredentialDefinition {
+  final CredentialDefinitionPlatform _platform;
+  factory CredentialDefinitionImpl(ExternalLibrary dylib) =>
+      CredentialDefinitionImpl.raw(CredentialDefinitionPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory CredentialDefinitionFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      CredentialDefinitionFFIImpl(module as ExternalLibrary);
-  CredentialDefinitionFFIImpl.raw(this._platform);
+  factory CredentialDefinitionImpl.wasm(FutureOr<WasmModule> module) =>
+      CredentialDefinitionImpl(module as ExternalLibrary);
+  CredentialDefinitionImpl.raw(this._platform);
   Future<int> credentialdefCreateV2(
       {required String sourceId,
       required String schemaId,

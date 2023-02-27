@@ -9,11 +9,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'out_of_band_receiver_generated.dart';
 export 'out_of_band_receiver_generated.dart';
 
-class OutOfBandReceiverFFIPlatform
-    extends FlutterRustBridgeBase<OutOfBandReceiverFFIWire>
+class OutOfBandReceiverPlatform
+    extends FlutterRustBridgeBase<OutOfBandReceiverWire>
     with FlutterRustBridgeSetupMixin {
-  OutOfBandReceiverFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(OutOfBandReceiverFFIWire(dylib)) {
+  OutOfBandReceiverPlatform(FutureOr<WasmModule> dylib)
+      : super(OutOfBandReceiverWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -40,14 +40,19 @@ class OutOfBandReceiverFFIPlatform
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external OutOfBandReceiverFFIWasmModule get wasmModule;
+external OutOfBandReceiverWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class OutOfBandReceiverFFIWasmModule implements WasmModule {
+class OutOfBandReceiverWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external OutOfBandReceiverFFIWasmModule bind(
-      dynamic thisArg, String moduleName);
+  external OutOfBandReceiverWasmModule bind(dynamic thisArg, String moduleName);
+  external dynamic /* void */ wire_out_of_band_receiver_create(
+      NativePortType port_, String msg);
+
+  external dynamic /* void */ wire_out_of_band_receiver_extract_message(
+      NativePortType port_, int handle);
+
   external dynamic /* void */ wire_out_of_band_receiver_connection_exists(
       NativePortType port_, int handle, Uint32List conn_handles);
 
@@ -69,10 +74,17 @@ class OutOfBandReceiverFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class OutOfBandReceiverFFIWire
-    extends FlutterRustBridgeWasmWireBase<OutOfBandReceiverFFIWasmModule> {
-  OutOfBandReceiverFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<OutOfBandReceiverFFIWasmModule>(module));
+class OutOfBandReceiverWire
+    extends FlutterRustBridgeWasmWireBase<OutOfBandReceiverWasmModule> {
+  OutOfBandReceiverWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<OutOfBandReceiverWasmModule>(module));
+
+  void wire_out_of_band_receiver_create(NativePortType port_, String msg) =>
+      wasmModule.wire_out_of_band_receiver_create(port_, msg);
+
+  void wire_out_of_band_receiver_extract_message(
+          NativePortType port_, int handle) =>
+      wasmModule.wire_out_of_band_receiver_extract_message(port_, handle);
 
   void wire_out_of_band_receiver_connection_exists(
           NativePortType port_, int handle, Uint32List conn_handles) =>

@@ -9,9 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'agent_generated.dart';
 export 'agent_generated.dart';
 
-class AgentFFIPlatform extends FlutterRustBridgeBase<AgentFFIWire>
+class AgentPlatform extends FlutterRustBridgeBase<AgentWire>
     with FlutterRustBridgeSetupMixin {
-  AgentFFIPlatform(FutureOr<WasmModule> dylib) : super(AgentFFIWire(dylib)) {
+  AgentPlatform(FutureOr<WasmModule> dylib) : super(AgentWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -33,22 +33,22 @@ class AgentFFIPlatform extends FlutterRustBridgeBase<AgentFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external AgentFFIWasmModule get wasmModule;
+external AgentWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class AgentFFIWasmModule implements WasmModule {
+class AgentWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external AgentFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external AgentWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_generate_public_invitation(
       NativePortType port_, String public_did, String label);
 }
 
 // Section: WASM wire connector
 
-class AgentFFIWire extends FlutterRustBridgeWasmWireBase<AgentFFIWasmModule> {
-  AgentFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<AgentFFIWasmModule>(module));
+class AgentWire extends FlutterRustBridgeWasmWireBase<AgentWasmModule> {
+  AgentWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<AgentWasmModule>(module));
 
   void wire_generate_public_invitation(
           NativePortType port_, String public_did, String label) =>

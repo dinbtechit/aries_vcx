@@ -359,13 +359,13 @@ mod io {
     // Section: allocate functions
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_revocation_registry_config_13(
+    pub extern "C" fn new_box_autoadd_revocation_registry_config_12(
     ) -> *mut wire_RevocationRegistryConfig {
         support::new_leak_box_ptr(wire_RevocationRegistryConfig::new_with_null_ptr())
     }
 
     #[no_mangle]
-    pub extern "C" fn new_uint_8_list_13(len: i32) -> *mut wire_uint_8_list {
+    pub extern "C" fn new_uint_8_list_12(len: i32) -> *mut wire_uint_8_list {
         let ans = wire_uint_8_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,

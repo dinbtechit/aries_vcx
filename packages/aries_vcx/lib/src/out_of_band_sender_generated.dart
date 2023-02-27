@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'out_of_band_sender_generated.io.dart'
     if (dart.library.html) 'out_of_band_sender_generated.web.dart';
 
-abstract class OutOfBandSenderFFI {
+abstract class OutOfBandSender {
   Future<int> outOfBandSenderCreate({required String config, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kOutOfBandSenderCreateConstMeta;
@@ -57,15 +57,15 @@ abstract class OutOfBandSenderFFI {
   FlutterRustBridgeTaskConstMeta get kOutOfBandSenderReleaseConstMeta;
 }
 
-class OutOfBandSenderFFIImpl implements OutOfBandSenderFFI {
-  final OutOfBandSenderFFIPlatform _platform;
-  factory OutOfBandSenderFFIImpl(ExternalLibrary dylib) =>
-      OutOfBandSenderFFIImpl.raw(OutOfBandSenderFFIPlatform(dylib));
+class OutOfBandSenderImpl implements OutOfBandSender {
+  final OutOfBandSenderPlatform _platform;
+  factory OutOfBandSenderImpl(ExternalLibrary dylib) =>
+      OutOfBandSenderImpl.raw(OutOfBandSenderPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory OutOfBandSenderFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      OutOfBandSenderFFIImpl(module as ExternalLibrary);
-  OutOfBandSenderFFIImpl.raw(this._platform);
+  factory OutOfBandSenderImpl.wasm(FutureOr<WasmModule> module) =>
+      OutOfBandSenderImpl(module as ExternalLibrary);
+  OutOfBandSenderImpl.raw(this._platform);
   Future<int> outOfBandSenderCreate({required String config, dynamic hint}) {
     var arg0 = _platform.api2wire_String(config);
     return _platform.executeNormal(FlutterRustBridgeTask(

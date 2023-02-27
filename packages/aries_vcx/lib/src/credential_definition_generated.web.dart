@@ -9,11 +9,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'credential_definition_generated.dart';
 export 'credential_definition_generated.dart';
 
-class CredentialDefinitionFFIPlatform
-    extends FlutterRustBridgeBase<CredentialDefinitionFFIWire>
+class CredentialDefinitionPlatform
+    extends FlutterRustBridgeBase<CredentialDefinitionWire>
     with FlutterRustBridgeSetupMixin {
-  CredentialDefinitionFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(CredentialDefinitionFFIWire(dylib)) {
+  CredentialDefinitionPlatform(FutureOr<WasmModule> dylib)
+      : super(CredentialDefinitionWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -35,13 +35,13 @@ class CredentialDefinitionFFIPlatform
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external CredentialDefinitionFFIWasmModule get wasmModule;
+external CredentialDefinitionWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class CredentialDefinitionFFIWasmModule implements WasmModule {
+class CredentialDefinitionWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external CredentialDefinitionFFIWasmModule bind(
+  external CredentialDefinitionWasmModule bind(
       dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_credentialdef_create_v2_(
       NativePortType port_,
@@ -74,10 +74,10 @@ class CredentialDefinitionFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class CredentialDefinitionFFIWire
-    extends FlutterRustBridgeWasmWireBase<CredentialDefinitionFFIWasmModule> {
-  CredentialDefinitionFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<CredentialDefinitionFFIWasmModule>(module));
+class CredentialDefinitionWire
+    extends FlutterRustBridgeWasmWireBase<CredentialDefinitionWasmModule> {
+  CredentialDefinitionWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<CredentialDefinitionWasmModule>(module));
 
   void wire_credentialdef_create_v2_(NativePortType port_, String source_id,
           String schema_id, String tag, bool support_revocation) =>

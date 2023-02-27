@@ -136,7 +136,7 @@ mod io {
     // Section: allocate functions
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_bool_15(value: bool) -> *mut bool {
+    pub extern "C" fn new_box_autoadd_bool_14(value: bool) -> *mut bool {
         support::new_leak_box_ptr(value)
     }
 

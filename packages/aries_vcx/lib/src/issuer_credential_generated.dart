@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'issuer_credential_generated.io.dart'
     if (dart.library.html) 'issuer_credential_generated.web.dart';
 
-abstract class IssuerCredentialFFI {
+abstract class IssuerCredential {
   Future<int> issuerCredentialDeserialize(
       {required String credentialData, dynamic hint});
 
@@ -110,15 +110,15 @@ abstract class IssuerCredentialFFI {
   FlutterRustBridgeTaskConstMeta get kIssuerCredentialGetThreadIdConstMeta;
 }
 
-class IssuerCredentialFFIImpl implements IssuerCredentialFFI {
-  final IssuerCredentialFFIPlatform _platform;
-  factory IssuerCredentialFFIImpl(ExternalLibrary dylib) =>
-      IssuerCredentialFFIImpl.raw(IssuerCredentialFFIPlatform(dylib));
+class IssuerCredentialImpl implements IssuerCredential {
+  final IssuerCredentialPlatform _platform;
+  factory IssuerCredentialImpl(ExternalLibrary dylib) =>
+      IssuerCredentialImpl.raw(IssuerCredentialPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory IssuerCredentialFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      IssuerCredentialFFIImpl(module as ExternalLibrary);
-  IssuerCredentialFFIImpl.raw(this._platform);
+  factory IssuerCredentialImpl.wasm(FutureOr<WasmModule> module) =>
+      IssuerCredentialImpl(module as ExternalLibrary);
+  IssuerCredentialImpl.raw(this._platform);
   Future<int> issuerCredentialDeserialize(
       {required String credentialData, dynamic hint}) {
     var arg0 = _platform.api2wire_String(credentialData);

@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'ledger_generated.io.dart'
     if (dart.library.html) 'ledger_generated.web.dart';
 
-abstract class LedgerFFI {
+abstract class Ledger {
   Future<String> getLedgerAuthorAgreement({dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kGetLedgerAuthorAgreementConstMeta;
@@ -71,15 +71,15 @@ class AriesService {
   });
 }
 
-class LedgerFFIImpl implements LedgerFFI {
-  final LedgerFFIPlatform _platform;
-  factory LedgerFFIImpl(ExternalLibrary dylib) =>
-      LedgerFFIImpl.raw(LedgerFFIPlatform(dylib));
+class LedgerImpl implements Ledger {
+  final LedgerPlatform _platform;
+  factory LedgerImpl(ExternalLibrary dylib) =>
+      LedgerImpl.raw(LedgerPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory LedgerFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      LedgerFFIImpl(module as ExternalLibrary);
-  LedgerFFIImpl.raw(this._platform);
+  factory LedgerImpl.wasm(FutureOr<WasmModule> module) =>
+      LedgerImpl(module as ExternalLibrary);
+  LedgerImpl.raw(this._platform);
   Future<String> getLedgerAuthorAgreement({dynamic hint}) {
     return _platform.executeNormal(FlutterRustBridgeTask(
       callFfi: (port_) =>

@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('A group of tests', () {
-    final awesome = AgencyClient();
+    //final awesome = AgencyClient();
 
     setUp(() {
       // Additional setup goes here.

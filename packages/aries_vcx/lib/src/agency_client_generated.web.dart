@@ -9,10 +9,10 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'agency_client_generated.dart';
 export 'agency_client_generated.dart';
 
-class AgencyClientFFIPlatform extends FlutterRustBridgeBase<AgencyClientFFIWire>
+class AgencyClientPlatform extends FlutterRustBridgeBase<AgencyClientWire>
     with FlutterRustBridgeSetupMixin {
-  AgencyClientFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(AgencyClientFFIWire(dylib)) {
+  AgencyClientPlatform(FutureOr<WasmModule> dylib)
+      : super(AgencyClientWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -74,13 +74,13 @@ class AgencyClientFFIPlatform extends FlutterRustBridgeBase<AgencyClientFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external AgencyClientFFIWasmModule get wasmModule;
+external AgencyClientWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class AgencyClientFFIWasmModule implements WasmModule {
+class AgencyClientWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external AgencyClientFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external AgencyClientWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_update_webhook_url(
       NativePortType port_, String webhook_url);
 
@@ -93,10 +93,10 @@ class AgencyClientFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class AgencyClientFFIWire
-    extends FlutterRustBridgeWasmWireBase<AgencyClientFFIWasmModule> {
-  AgencyClientFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<AgencyClientFFIWasmModule>(module));
+class AgencyClientWire
+    extends FlutterRustBridgeWasmWireBase<AgencyClientWasmModule> {
+  AgencyClientWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<AgencyClientWasmModule>(module));
 
   void wire_update_webhook_url(NativePortType port_, String webhook_url) =>
       wasmModule.wire_update_webhook_url(port_, webhook_url);

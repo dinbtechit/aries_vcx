@@ -1,5 +1,5 @@
 use vcx::api_vcx::api_global::ledger;
-use vcx::serde_json::json;
+
 use flutter_rust_bridge::frb;
 pub use vcx::aries_vcx::messages::diddoc::aries::service::AriesService;
 
@@ -29,7 +29,7 @@ pub fn set_active_txn_author_agreement_meta(
     acc_mech_type: String,
     time_of_acceptance: u64,
 ) -> anyhow::Result<()> {
-    ledger::ledger_set_txn_author_agreement(text, version, hash, acc_mech_type, time_of_acceptance as u64)
+    ledger::ledger_set_txn_author_agreement(text, version, hash, acc_mech_type, time_of_acceptance)
         .map_err(anyhow::Error::from)
 }
 

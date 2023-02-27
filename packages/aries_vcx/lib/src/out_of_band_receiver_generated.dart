@@ -14,7 +14,16 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'out_of_band_receiver_generated.io.dart'
     if (dart.library.html) 'out_of_band_receiver_generated.web.dart';
 
-abstract class OutOfBandReceiverFFI {
+abstract class OutOfBandReceiver {
+  Future<int> outOfBandReceiverCreate({required String msg, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kOutOfBandReceiverCreateConstMeta;
+
+  Future<String> outOfBandReceiverExtractMessage(
+      {required int handle, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kOutOfBandReceiverExtractMessageConstMeta;
+
   Future<int> outOfBandReceiverConnectionExists(
       {required int handle, required Uint32List connHandles, dynamic hint});
 
@@ -46,15 +55,53 @@ abstract class OutOfBandReceiverFFI {
   FlutterRustBridgeTaskConstMeta get kOutOfBandReceiverReleaseConstMeta;
 }
 
-class OutOfBandReceiverFFIImpl implements OutOfBandReceiverFFI {
-  final OutOfBandReceiverFFIPlatform _platform;
-  factory OutOfBandReceiverFFIImpl(ExternalLibrary dylib) =>
-      OutOfBandReceiverFFIImpl.raw(OutOfBandReceiverFFIPlatform(dylib));
+class OutOfBandReceiverImpl implements OutOfBandReceiver {
+  final OutOfBandReceiverPlatform _platform;
+  factory OutOfBandReceiverImpl(ExternalLibrary dylib) =>
+      OutOfBandReceiverImpl.raw(OutOfBandReceiverPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory OutOfBandReceiverFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      OutOfBandReceiverFFIImpl(module as ExternalLibrary);
-  OutOfBandReceiverFFIImpl.raw(this._platform);
+  factory OutOfBandReceiverImpl.wasm(FutureOr<WasmModule> module) =>
+      OutOfBandReceiverImpl(module as ExternalLibrary);
+  OutOfBandReceiverImpl.raw(this._platform);
+  Future<int> outOfBandReceiverCreate({required String msg, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(msg);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) =>
+          _platform.inner.wire_out_of_band_receiver_create(port_, arg0),
+      parseSuccessData: _wire2api_u32,
+      constMeta: kOutOfBandReceiverCreateConstMeta,
+      argValues: [msg],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kOutOfBandReceiverCreateConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "out_of_band_receiver_create",
+        argNames: ["msg"],
+      );
+
+  Future<String> outOfBandReceiverExtractMessage(
+      {required int handle, dynamic hint}) {
+    var arg0 = api2wire_u32(handle);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner
+          .wire_out_of_band_receiver_extract_message(port_, arg0),
+      parseSuccessData: _wire2api_String,
+      constMeta: kOutOfBandReceiverExtractMessageConstMeta,
+      argValues: [handle],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta
+      get kOutOfBandReceiverExtractMessageConstMeta =>
+          const FlutterRustBridgeTaskConstMeta(
+            debugName: "out_of_band_receiver_extract_message",
+            argNames: ["handle"],
+          );
+
   Future<int> outOfBandReceiverConnectionExists(
       {required int handle, required Uint32List connHandles, dynamic hint}) {
     var arg0 = api2wire_u32(handle);

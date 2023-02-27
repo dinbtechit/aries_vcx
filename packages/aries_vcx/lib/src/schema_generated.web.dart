@@ -9,9 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'schema_generated.dart';
 export 'schema_generated.dart';
 
-class SchemaFFIPlatform extends FlutterRustBridgeBase<SchemaFFIWire>
+class SchemaPlatform extends FlutterRustBridgeBase<SchemaWire>
     with FlutterRustBridgeSetupMixin {
-  SchemaFFIPlatform(FutureOr<WasmModule> dylib) : super(SchemaFFIWire(dylib)) {
+  SchemaPlatform(FutureOr<WasmModule> dylib) : super(SchemaWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -33,13 +33,13 @@ class SchemaFFIPlatform extends FlutterRustBridgeBase<SchemaFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external SchemaFFIWasmModule get wasmModule;
+external SchemaWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class SchemaFFIWasmModule implements WasmModule {
+class SchemaWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external SchemaFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external SchemaWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_schema_get_attributes(
       NativePortType port_, String _source_id, String _schema_id);
 
@@ -70,9 +70,9 @@ class SchemaFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class SchemaFFIWire extends FlutterRustBridgeWasmWireBase<SchemaFFIWasmModule> {
-  SchemaFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<SchemaFFIWasmModule>(module));
+class SchemaWire extends FlutterRustBridgeWasmWireBase<SchemaWasmModule> {
+  SchemaWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<SchemaWasmModule>(module));
 
   void wire_schema_get_attributes(
           NativePortType port_, String _source_id, String _schema_id) =>

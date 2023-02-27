@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'pool_generated.io.dart'
     if (dart.library.html) 'pool_generated.web.dart';
 
-abstract class PoolFFI {
+abstract class Pool {
   Future<void> openMainPool({required String poolConfig, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kOpenMainPoolConstMeta;
@@ -24,15 +24,14 @@ abstract class PoolFFI {
   FlutterRustBridgeTaskConstMeta get kCloseMainPoolConstMeta;
 }
 
-class PoolFFIImpl implements PoolFFI {
-  final PoolFFIPlatform _platform;
-  factory PoolFFIImpl(ExternalLibrary dylib) =>
-      PoolFFIImpl.raw(PoolFFIPlatform(dylib));
+class PoolImpl implements Pool {
+  final PoolPlatform _platform;
+  factory PoolImpl(ExternalLibrary dylib) => PoolImpl.raw(PoolPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory PoolFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      PoolFFIImpl(module as ExternalLibrary);
-  PoolFFIImpl.raw(this._platform);
+  factory PoolImpl.wasm(FutureOr<WasmModule> module) =>
+      PoolImpl(module as ExternalLibrary);
+  PoolImpl.raw(this._platform);
   Future<void> openMainPool({required String poolConfig, dynamic hint}) {
     var arg0 = _platform.api2wire_String(poolConfig);
     return _platform.executeNormal(FlutterRustBridgeTask(

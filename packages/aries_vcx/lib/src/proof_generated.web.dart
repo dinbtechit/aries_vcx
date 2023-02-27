@@ -9,9 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'proof_generated.dart';
 export 'proof_generated.dart';
 
-class ProofFFIPlatform extends FlutterRustBridgeBase<ProofFFIWire>
+class ProofPlatform extends FlutterRustBridgeBase<ProofWire>
     with FlutterRustBridgeSetupMixin {
-  ProofFFIPlatform(FutureOr<WasmModule> dylib) : super(ProofFFIWire(dylib)) {
+  ProofPlatform(FutureOr<WasmModule> dylib) : super(ProofWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -33,13 +33,13 @@ class ProofFFIPlatform extends FlutterRustBridgeBase<ProofFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external ProofFFIWasmModule get wasmModule;
+external ProofWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class ProofFFIWasmModule implements WasmModule {
+class ProofWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external ProofFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external ProofWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_proof_create(
       NativePortType port_,
       String source_id,
@@ -90,9 +90,9 @@ class ProofFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class ProofFFIWire extends FlutterRustBridgeWasmWireBase<ProofFFIWasmModule> {
-  ProofFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<ProofFFIWasmModule>(module));
+class ProofWire extends FlutterRustBridgeWasmWireBase<ProofWasmModule> {
+  ProofWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<ProofWasmModule>(module));
 
   void wire_proof_create(
           NativePortType port_,

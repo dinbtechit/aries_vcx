@@ -9,12 +9,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'ledger_generated.dart';
 export 'ledger_generated.dart';
 
-class LedgerFFIPlatform extends FlutterRustBridgeBase<LedgerFFIWire>
+class LedgerPlatform extends FlutterRustBridgeBase<LedgerWire>
     with FlutterRustBridgeSetupMixin {
-  LedgerFFIPlatform(FutureOr<WasmModule> dylib) : super(LedgerFFIWire(dylib)) {
+  LedgerPlatform(FutureOr<WasmModule> dylib) : super(LedgerWire(dylib)) {
     setupMixinConstructor();
   }
-
   Future<void> setup() => inner.init;
 
 // Section: api2wire
@@ -49,15 +48,13 @@ class LedgerFFIPlatform extends FlutterRustBridgeBase<LedgerFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external LedgerFFIWasmModule get wasmModule;
+external LedgerWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class LedgerFFIWasmModule implements WasmModule {
+class LedgerWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-
-  external LedgerFFIWasmModule bind(dynamic thisArg, String moduleName);
-
+  external LedgerWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_get_ledger_author_agreement(
       NativePortType port_);
 
@@ -88,9 +85,9 @@ class LedgerFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class LedgerFFIWire extends FlutterRustBridgeWasmWireBase<LedgerFFIWasmModule> {
-  LedgerFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<LedgerFFIWasmModule>(module));
+class LedgerWire extends FlutterRustBridgeWasmWireBase<LedgerWasmModule> {
+  LedgerWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<LedgerWasmModule>(module));
 
   void wire_get_ledger_author_agreement(NativePortType port_) =>
       wasmModule.wire_get_ledger_author_agreement(port_);

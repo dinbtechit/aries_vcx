@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'proof_generated.io.dart'
     if (dart.library.html) 'proof_generated.web.dart';
 
-abstract class ProofFFI {
+abstract class Proof {
   Future<int> proofCreate(
       {required String sourceId,
       required String requestedAttrs,
@@ -81,15 +81,15 @@ abstract class ProofFFI {
   FlutterRustBridgeTaskConstMeta get kMarkPresentationRequestMsgSentConstMeta;
 }
 
-class ProofFFIImpl implements ProofFFI {
-  final ProofFFIPlatform _platform;
-  factory ProofFFIImpl(ExternalLibrary dylib) =>
-      ProofFFIImpl.raw(ProofFFIPlatform(dylib));
+class ProofImpl implements Proof {
+  final ProofPlatform _platform;
+  factory ProofImpl(ExternalLibrary dylib) =>
+      ProofImpl.raw(ProofPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory ProofFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      ProofFFIImpl(module as ExternalLibrary);
-  ProofFFIImpl.raw(this._platform);
+  factory ProofImpl.wasm(FutureOr<WasmModule> module) =>
+      ProofImpl(module as ExternalLibrary);
+  ProofImpl.raw(this._platform);
   Future<int> proofCreate(
       {required String sourceId,
       required String requestedAttrs,

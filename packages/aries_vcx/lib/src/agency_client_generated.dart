@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'agency_client_generated.io.dart'
     if (dart.library.html) 'agency_client_generated.web.dart';
 
-abstract class AgencyClientFFI {
+abstract class AgencyClient {
   Future<void> updateWebhookUrl({required String webhookUrl, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kUpdateWebhookUrlConstMeta;
@@ -64,15 +64,15 @@ class AgentProvisionConfig {
   });
 }
 
-class AgencyClientFFIImpl implements AgencyClientFFI {
-  final AgencyClientFFIPlatform _platform;
-  factory AgencyClientFFIImpl(ExternalLibrary dylib) =>
-      AgencyClientFFIImpl.raw(AgencyClientFFIPlatform(dylib));
+class AgencyClientImpl implements AgencyClient {
+  final AgencyClientPlatform _platform;
+  factory AgencyClientImpl(ExternalLibrary dylib) =>
+      AgencyClientImpl.raw(AgencyClientPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory AgencyClientFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      AgencyClientFFIImpl(module as ExternalLibrary);
-  AgencyClientFFIImpl.raw(this._platform);
+  factory AgencyClientImpl.wasm(FutureOr<WasmModule> module) =>
+      AgencyClientImpl(module as ExternalLibrary);
+  AgencyClientImpl.raw(this._platform);
   Future<void> updateWebhookUrl({required String webhookUrl, dynamic hint}) {
     var arg0 = _platform.api2wire_String(webhookUrl);
     return _platform.executeNormal(FlutterRustBridgeTask(

@@ -9,10 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'logging_generated.dart';
 export 'logging_generated.dart';
 
-class LoggingFFIPlatform extends FlutterRustBridgeBase<LoggingFFIWire>
+class LoggingPlatform extends FlutterRustBridgeBase<LoggingWire>
     with FlutterRustBridgeSetupMixin {
-  LoggingFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(LoggingFFIWire(dylib)) {
+  LoggingPlatform(FutureOr<WasmModule> dylib) : super(LoggingWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -39,23 +38,22 @@ class LoggingFFIPlatform extends FlutterRustBridgeBase<LoggingFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external LoggingFFIWasmModule get wasmModule;
+external LoggingWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class LoggingFFIWasmModule implements WasmModule {
+class LoggingWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external LoggingFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external LoggingWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_init_default_logger(
       NativePortType port_, String? pattern);
 }
 
 // Section: WASM wire connector
 
-class LoggingFFIWire
-    extends FlutterRustBridgeWasmWireBase<LoggingFFIWasmModule> {
-  LoggingFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<LoggingFFIWasmModule>(module));
+class LoggingWire extends FlutterRustBridgeWasmWireBase<LoggingWasmModule> {
+  LoggingWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<LoggingWasmModule>(module));
 
   void wire_init_default_logger(NativePortType port_, String? pattern) =>
       wasmModule.wire_init_default_logger(port_, pattern);

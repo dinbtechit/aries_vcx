@@ -9,9 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'wallet_generated.dart';
 export 'wallet_generated.dart';
 
-class WalletFFIPlatform extends FlutterRustBridgeBase<WalletFFIWire>
+class WalletPlatform extends FlutterRustBridgeBase<WalletWire>
     with FlutterRustBridgeSetupMixin {
-  WalletFFIPlatform(FutureOr<WasmModule> dylib) : super(WalletFFIWire(dylib)) {
+  WalletPlatform(FutureOr<WasmModule> dylib) : super(WalletWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -84,13 +84,13 @@ class WalletFFIPlatform extends FlutterRustBridgeBase<WalletFFIWire>
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external WalletFFIWasmModule get wasmModule;
+external WalletWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class WalletFFIWasmModule implements WasmModule {
+class WalletWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external WalletFFIWasmModule bind(dynamic thisArg, String moduleName);
+  external WalletWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_wallet_open_as_main(
       NativePortType port_, List<dynamic> wallet_config);
 
@@ -130,9 +130,9 @@ class WalletFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class WalletFFIWire extends FlutterRustBridgeWasmWireBase<WalletFFIWasmModule> {
-  WalletFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<WalletFFIWasmModule>(module));
+class WalletWire extends FlutterRustBridgeWasmWireBase<WalletWasmModule> {
+  WalletWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<WalletWasmModule>(module));
 
   void wire_wallet_open_as_main(
           NativePortType port_, List<dynamic> wallet_config) =>

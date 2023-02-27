@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'revocation_registry_generated.io.dart'
     if (dart.library.html) 'revocation_registry_generated.web.dart';
 
-abstract class RevocationRegistryFFI {
+abstract class RevocationRegistry {
   Future<int> revocationRegistryCreate(
       {required RevocationRegistryConfig config, dynamic hint});
 
@@ -72,15 +72,15 @@ class RevocationRegistryConfig {
   });
 }
 
-class RevocationRegistryFFIImpl implements RevocationRegistryFFI {
-  final RevocationRegistryFFIPlatform _platform;
-  factory RevocationRegistryFFIImpl(ExternalLibrary dylib) =>
-      RevocationRegistryFFIImpl.raw(RevocationRegistryFFIPlatform(dylib));
+class RevocationRegistryImpl implements RevocationRegistry {
+  final RevocationRegistryPlatform _platform;
+  factory RevocationRegistryImpl(ExternalLibrary dylib) =>
+      RevocationRegistryImpl.raw(RevocationRegistryPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory RevocationRegistryFFIImpl.wasm(FutureOr<WasmModule> module) =>
-      RevocationRegistryFFIImpl(module as ExternalLibrary);
-  RevocationRegistryFFIImpl.raw(this._platform);
+  factory RevocationRegistryImpl.wasm(FutureOr<WasmModule> module) =>
+      RevocationRegistryImpl(module as ExternalLibrary);
+  RevocationRegistryImpl.raw(this._platform);
   Future<int> revocationRegistryCreate(
       {required RevocationRegistryConfig config, dynamic hint}) {
     var arg0 =

@@ -9,11 +9,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'issuer_credential_generated.dart';
 export 'issuer_credential_generated.dart';
 
-class IssuerCredentialFFIPlatform
-    extends FlutterRustBridgeBase<IssuerCredentialFFIWire>
+class IssuerCredentialPlatform
+    extends FlutterRustBridgeBase<IssuerCredentialWire>
     with FlutterRustBridgeSetupMixin {
-  IssuerCredentialFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(IssuerCredentialFFIWire(dylib)) {
+  IssuerCredentialPlatform(FutureOr<WasmModule> dylib)
+      : super(IssuerCredentialWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -40,14 +40,13 @@ class IssuerCredentialFFIPlatform
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external IssuerCredentialFFIWasmModule get wasmModule;
+external IssuerCredentialWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class IssuerCredentialFFIWasmModule implements WasmModule {
+class IssuerCredentialWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external IssuerCredentialFFIWasmModule bind(
-      dynamic thisArg, String moduleName);
+  external IssuerCredentialWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_issuer_credential_deserialize(
       NativePortType port_, String credential_data);
 
@@ -105,10 +104,10 @@ class IssuerCredentialFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class IssuerCredentialFFIWire
-    extends FlutterRustBridgeWasmWireBase<IssuerCredentialFFIWasmModule> {
-  IssuerCredentialFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<IssuerCredentialFFIWasmModule>(module));
+class IssuerCredentialWire
+    extends FlutterRustBridgeWasmWireBase<IssuerCredentialWasmModule> {
+  IssuerCredentialWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<IssuerCredentialWasmModule>(module));
 
   void wire_issuer_credential_deserialize(
           NativePortType port_, String credential_data) =>

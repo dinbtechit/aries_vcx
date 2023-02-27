@@ -1,8 +1,8 @@
 import 'dart:ffi';
 
-import 'package:aries_vcx/src/agency_client_generated.dart';
+import '../../aries_vcx.dart';
 
 typedef ExternalLibrary = DynamicLibrary;
 
-AgencyClientFFI createWrapperImpl(ExternalLibrary dylib) =>
-    AgencyClientFFIImpl(dylib);
+AriesVcxInterface createWrapperImpl(ExternalLibrary dylib) =>
+    AriesVcxInterface.library(dylib);

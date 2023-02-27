@@ -9,11 +9,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'mediator_connection_generated.dart';
 export 'mediator_connection_generated.dart';
 
-class MediatorConnectionFFIPlatform
-    extends FlutterRustBridgeBase<MediatorConnectionFFIWire>
+class MediatorConnectionPlatform
+    extends FlutterRustBridgeBase<MediatorConnectionWire>
     with FlutterRustBridgeSetupMixin {
-  MediatorConnectionFFIPlatform(FutureOr<WasmModule> dylib)
-      : super(MediatorConnectionFFIWire(dylib)) {
+  MediatorConnectionPlatform(FutureOr<WasmModule> dylib)
+      : super(MediatorConnectionWire(dylib)) {
     setupMixinConstructor();
   }
   Future<void> setup() => inner.init;
@@ -45,13 +45,13 @@ class MediatorConnectionFFIPlatform
 // Section: WASM wire module
 
 @JS('wasm_bindgen')
-external MediatorConnectionFFIWasmModule get wasmModule;
+external MediatorConnectionWasmModule get wasmModule;
 
 @JS()
 @anonymous
-class MediatorConnectionFFIWasmModule implements WasmModule {
+class MediatorConnectionWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
-  external MediatorConnectionFFIWasmModule bind(
+  external MediatorConnectionWasmModule bind(
       dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_mediated_connection_generate_public_invite(
       NativePortType port_, String public_did, String label);
@@ -139,10 +139,10 @@ class MediatorConnectionFFIWasmModule implements WasmModule {
 
 // Section: WASM wire connector
 
-class MediatorConnectionFFIWire
-    extends FlutterRustBridgeWasmWireBase<MediatorConnectionFFIWasmModule> {
-  MediatorConnectionFFIWire(FutureOr<WasmModule> module)
-      : super(WasmModule.cast<MediatorConnectionFFIWasmModule>(module));
+class MediatorConnectionWire
+    extends FlutterRustBridgeWasmWireBase<MediatorConnectionWasmModule> {
+  MediatorConnectionWire(FutureOr<WasmModule> module)
+      : super(WasmModule.cast<MediatorConnectionWasmModule>(module));
 
   void wire_mediated_connection_generate_public_invite(
           NativePortType port_, String public_did, String label) =>

@@ -134,11 +134,11 @@ typedef struct wire_AgentProvisionConfig {
 
 typedef struct DartCObject *WireSyncReturn;
 
-struct wire_IssuerConfig *new_box_autoadd_issuer_config_16(void);
+struct wire_IssuerConfig *new_box_autoadd_issuer_config_15(void);
 
-struct wire_RestoreWalletConfigs *new_box_autoadd_restore_wallet_configs_16(void);
+struct wire_RestoreWalletConfigs *new_box_autoadd_restore_wallet_configs_15(void);
 
-struct wire_WalletConfig *new_box_autoadd_wallet_config_16(void);
+struct wire_WalletConfig *new_box_autoadd_wallet_config_15(void);
 
 void store_dart_post_cobject(DartPostCObjectFnType ptr);
 
@@ -174,13 +174,13 @@ void wire_schema_update_state(int64_t port_, uint32_t handle_schema);
 
 void wire_schema_get_state(int64_t port_, uint32_t handle_schema);
 
-struct wire_uint_8_list *new_uint_8_list_14(int32_t len);
+struct wire_uint_8_list *new_uint_8_list_13(int32_t len);
 
-struct wire_RevocationRegistryConfig *new_box_autoadd_revocation_registry_config_13(void);
+struct wire_RevocationRegistryConfig *new_box_autoadd_revocation_registry_config_12(void);
 
-struct wire_AgencyClientConfig *new_box_autoadd_agency_client_config_1(void);
+struct wire_AgencyClientConfig *new_box_autoadd_agency_client_config_0(void);
 
-struct wire_AgentProvisionConfig *new_box_autoadd_agent_provision_config_1(void);
+struct wire_AgentProvisionConfig *new_box_autoadd_agent_provision_config_0(void);
 
 void free_WireSyncReturn(WireSyncReturn ptr);
 
@@ -195,7 +195,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) wire_schema_release);
     dummy_var ^= ((int64_t) (void*) wire_schema_update_state);
     dummy_var ^= ((int64_t) (void*) wire_schema_get_state);
-    dummy_var ^= ((int64_t) (void*) new_uint_8_list_14);
+    dummy_var ^= ((int64_t) (void*) new_uint_8_list_13);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);
     dummy_var ^= ((int64_t) (void*) get_dart_object);
     dummy_var ^= ((int64_t) (void*) drop_dart_object);

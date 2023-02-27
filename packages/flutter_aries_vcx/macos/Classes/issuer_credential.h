@@ -134,13 +134,13 @@ typedef struct wire_AgentProvisionConfig {
 
 typedef struct DartCObject *WireSyncReturn;
 
-struct wire_IssuerConfig *new_box_autoadd_issuer_config_16(void);
+struct wire_IssuerConfig *new_box_autoadd_issuer_config_15(void);
 
-struct wire_RestoreWalletConfigs *new_box_autoadd_restore_wallet_configs_16(void);
+struct wire_RestoreWalletConfigs *new_box_autoadd_restore_wallet_configs_15(void);
 
-struct wire_WalletConfig *new_box_autoadd_wallet_config_16(void);
+struct wire_WalletConfig *new_box_autoadd_wallet_config_15(void);
 
-struct wire_RevocationRegistryConfig *new_box_autoadd_revocation_registry_config_13(void);
+struct wire_RevocationRegistryConfig *new_box_autoadd_revocation_registry_config_12(void);
 
 void store_dart_post_cobject(DartPostCObjectFnType ptr);
 
@@ -198,11 +198,11 @@ void wire_issuer_credential_release(int64_t port_, uint32_t credential_handle);
 
 void wire_issuer_credential_get_thread_id(int64_t port_, uint32_t credential_handle);
 
-struct wire_uint_8_list *new_uint_8_list_5(int32_t len);
+struct wire_uint_8_list *new_uint_8_list_4(int32_t len);
 
-struct wire_AgencyClientConfig *new_box_autoadd_agency_client_config_1(void);
+struct wire_AgencyClientConfig *new_box_autoadd_agency_client_config_0(void);
 
-struct wire_AgentProvisionConfig *new_box_autoadd_agent_provision_config_1(void);
+struct wire_AgentProvisionConfig *new_box_autoadd_agent_provision_config_0(void);
 
 void free_WireSyncReturn(WireSyncReturn ptr);
 
@@ -224,7 +224,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) wire_issuer_credential_get_offer_msg);
     dummy_var ^= ((int64_t) (void*) wire_issuer_credential_release);
     dummy_var ^= ((int64_t) (void*) wire_issuer_credential_get_thread_id);
-    dummy_var ^= ((int64_t) (void*) new_uint_8_list_5);
+    dummy_var ^= ((int64_t) (void*) new_uint_8_list_4);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);
     dummy_var ^= ((int64_t) (void*) get_dart_object);
     dummy_var ^= ((int64_t) (void*) drop_dart_object);

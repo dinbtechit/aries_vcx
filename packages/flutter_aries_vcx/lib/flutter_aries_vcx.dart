@@ -1,5 +1,5 @@
-
 export 'package:aries_vcx/aries_vcx.dart';
+export 'package:flutter_aries_vcx/src/flutter_interface.dart';
 
 import 'dart:async';
 import 'dart:ffi';
@@ -36,12 +36,12 @@ Future<int> sumAsync(int a, int b) async {
   return completer.future;
 }
 
-const String _libName = 'flutter_aries_vcx';
+const String _libName = 'aries_vcx';
 
 /// The dynamic library in which the symbols for [FlutterAriesVcxBindings] can be found.
 final DynamicLibrary _dylib = () {
   if (Platform.isMacOS || Platform.isIOS) {
-    return DynamicLibrary.open('$_libName.framework/$_libName');
+    return DynamicLibrary.executable();
   }
   if (Platform.isAndroid || Platform.isLinux) {
     return DynamicLibrary.open('lib$_libName.so');
@@ -54,7 +54,6 @@ final DynamicLibrary _dylib = () {
 
 /// The bindings to the native functions in [_dylib].
 final FlutterAriesVcxBindings _bindings = FlutterAriesVcxBindings(_dylib);
-
 
 /// A request to compute `sum`.
 ///

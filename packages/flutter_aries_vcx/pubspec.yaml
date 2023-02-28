@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  aries_vcx: 1.0.0
+  path: ^1.8.2
+  path_provider: ^2.0.11
 
 dev_dependencies:
   #ffi: ^1.2.1
@@ -18,9 +21,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  aries_vcx: 1.0.0
-  path: ^1.8.2
-  path_provider: ^2.0.11
 
 flutter:
   plugin:

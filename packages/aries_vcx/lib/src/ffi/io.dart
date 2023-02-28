@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import '../../aries_vcx.dart';
 

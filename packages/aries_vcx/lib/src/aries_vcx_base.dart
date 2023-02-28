@@ -31,13 +31,11 @@ final AriesVcx = AriesVcxInterface._();
 class AriesVcxInterface {
   static final AriesVcxInterface _instance = AriesVcx;
   late dynamic externalLibrary;
-  late String path;
 
   AriesVcxInterface._();
 
   factory AriesVcxInterface.library(ExternalLibrary externalLibrary) {
     _instance.externalLibrary = externalLibrary;
-    _instance.path;
     return _instance;
   }
   factory AriesVcxInterface.wasm(FutureOr<WasmModule> module){

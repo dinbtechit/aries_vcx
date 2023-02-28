@@ -19,6 +19,7 @@ extension FlutterAriesVcx on AriesVcxInterface {
       const defaultSubDir = 'aries_vcx';
       final appSupportDir = await pp.getApplicationSupportDirectory();
       final path = p.join(appSupportDir.path, defaultSubDir, name);
+      print('Path: $path');
       return getInstanceForPath(path);
     } on pp.MissingPlatformDirectoryException {
       throw UnsupportedError(

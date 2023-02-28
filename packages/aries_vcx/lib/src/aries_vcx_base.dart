@@ -47,23 +47,9 @@ class AriesVcxInterface {
     return createWrapperImpl(library);
   }
 
-  AgencyClient get agencyClient {
-    if (_instance.externalLibrary is ExternalLibrary) {
-      AgencyClientImpl(_instance.externalLibrary as ExternalLibrary);
-    } else if (_instance.externalLibrary is FutureOr<WasmModule>) {
-      AgencyClientImpl.wasm(_instance.externalLibrary as FutureOr<WasmModule>);
-    }
-    throw Exception('unsupported');
-  }
+  AgencyClient get agencyClient => createAgencyClient();
 
-  Agent get agent {
-    if (_instance.externalLibrary is ExternalLibrary) {
-      AgentImpl(_instance.externalLibrary as ExternalLibrary);
-    } else if (_instance.externalLibrary is FutureOr<WasmModule>) {
-      AgentImpl.wasm(_instance.externalLibrary as FutureOr<WasmModule>);
-    }
-    throw Exception('unsupported');
-  }
+  Agent get agent => createAgent();
 
   CredentialDefinition get credentialDefinition {
     if (_instance.externalLibrary is ExternalLibrary) {

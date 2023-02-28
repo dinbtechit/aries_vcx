@@ -23,10 +23,6 @@ import 'agency_client_generated.dart';
 import 'agent_generated.dart';
 
 
-enum LibraryType {
-  dylib,
-  wasm
-}
 
 // ignore: non_constant_identifier_names
 final AriesVcx = AriesVcxInterface._();
@@ -36,7 +32,6 @@ class AriesVcxInterface {
   static final AriesVcxInterface _instance = AriesVcx;
   late dynamic externalLibrary;
   late String path;
-  late LibraryType libraryType;
 
   AriesVcxInterface._();
 

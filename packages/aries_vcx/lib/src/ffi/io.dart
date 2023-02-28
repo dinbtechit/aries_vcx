@@ -1,8 +1,9 @@
 import 'dart:ffi';
 
+import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import '../../aries_vcx.dart';
 
-typedef ExternalLibrary = DynamicLibrary;
+
 
 AriesVcxInterface createWrapperImpl(ExternalLibrary dylib) =>
     AriesVcxInterface.library(dylib);

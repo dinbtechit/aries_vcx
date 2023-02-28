@@ -6,7 +6,7 @@ Future<void> pause() => Future.delayed(const Duration(milliseconds: 500));
 Future<void> main() async {
   testWidgets('Create instance', (tester) async {
     var arireVcx = await AriesVcx.defaultInstance;
-    arireVcx.agencyClient;
-    arireVcx.agent;
+    expect(arireVcx.agencyClient, isNotNull);
+    expect(arireVcx.agent, isNotNull);
   });
 }

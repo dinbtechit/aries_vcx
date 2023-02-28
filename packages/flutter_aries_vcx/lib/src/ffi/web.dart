@@ -1,4 +1,4 @@
-import 'package:aries_vcx/aries_vcx.dart';
+import 'package:flutter_aries_vcx/flutter_aries_vcx.dart';
 
 WasmModule createLibraryImpl() {
   // Web is currently not supported. If we support web in the future, see:

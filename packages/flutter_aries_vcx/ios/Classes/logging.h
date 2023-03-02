@@ -5,115 +5,49 @@ typedef struct _Dart_Handle* Dart_Handle;
 
 typedef struct DartCObject DartCObject;
 
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_uint_8_list {
-  uint8_t *ptr;
-  int32_t len;
-} wire_uint_8_list;
-
-typedef struct wire_IssuerConfig {
-  struct wire_uint_8_list *institution_did;
-} wire_IssuerConfig;
-
-typedef struct wire_RestoreWalletConfigs {
-  struct wire_uint_8_list *wallet_name;
-  struct wire_uint_8_list *wallet_key;
-  struct wire_uint_8_list *exported_wallet_path;
-  struct wire_uint_8_list *backup_key;
-  struct wire_uint_8_list *wallet_key_derivation;
-} wire_RestoreWalletConfigs;
-
-typedef struct wire_WalletConfig {
-  struct wire_uint_8_list *wallet_name;
-  struct wire_uint_8_list *wallet_key;
-  struct wire_uint_8_list *wallet_key_derivation;
-  struct wire_uint_8_list *wallet_type;
-  struct wire_uint_8_list *storage_config;
-  struct wire_uint_8_list *storage_credentials;
-  struct wire_uint_8_list *rekey;
-  struct wire_uint_8_list *rekey_derivation_method;
-} wire_WalletConfig;
-
-typedef struct wire_RevocationRegistryConfig {
-  struct wire_uint_8_list *issuer_did;
-  struct wire_uint_8_list *cred_def_id;
-  uint32_t tag;
-  struct wire_uint_8_list *tails_dir;
-  uint32_t max_creds;
-} wire_RevocationRegistryConfig;
-
 typedef int64_t DartPort;
 
 typedef bool (*DartPostCObjectFnType)(DartPort port_id, void *message);
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
+
+typedef struct wire_uint_8_list {
+  uint8_t *ptr;
+  int32_t len;
+} wire_uint_8_list;
 
 typedef struct wire_AgencyClientConfig {
   struct wire_uint_8_list *agency_did;
@@ -134,14 +68,6 @@ typedef struct wire_AgentProvisionConfig {
 
 typedef struct DartCObject *WireSyncReturn;
 
-struct wire_IssuerConfig *new_box_autoadd_issuer_config_15(void);
-
-struct wire_RestoreWalletConfigs *new_box_autoadd_restore_wallet_configs_15(void);
-
-struct wire_WalletConfig *new_box_autoadd_wallet_config_15(void);
-
-struct wire_RevocationRegistryConfig *new_box_autoadd_revocation_registry_config_12(void);
-
 void store_dart_post_cobject(DartPostCObjectFnType ptr);
 
 Dart_Handle get_dart_object(uintptr_t ptr);
@@ -154,7 +80,7 @@ intptr_t init_frb_dart_api_dl(void *obj);
 
 void wire_init_default_logger(int64_t port_, struct wire_uint_8_list *pattern);
 
-struct wire_uint_8_list *new_uint_8_list_6(int32_t len);
+struct wire_uint_8_list *new_uint_8_list_7(int32_t len);
 
 struct wire_AgencyClientConfig *new_box_autoadd_agency_client_config_0(void);
 
@@ -165,7 +91,7 @@ void free_WireSyncReturn(WireSyncReturn ptr);
 static int64_t dummy_method_to_enforce_bundling(void) {
     int64_t dummy_var = 0;
     dummy_var ^= ((int64_t) (void*) wire_init_default_logger);
-    dummy_var ^= ((int64_t) (void*) new_uint_8_list_6);
+    dummy_var ^= ((int64_t) (void*) new_uint_8_list_7);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);
     dummy_var ^= ((int64_t) (void*) get_dart_object);
     dummy_var ^= ((int64_t) (void*) drop_dart_object);

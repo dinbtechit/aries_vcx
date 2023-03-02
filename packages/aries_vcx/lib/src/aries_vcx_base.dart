@@ -4,8 +4,11 @@ import 'dart:async';
 
 import 'package:aries_vcx/src/_generated/agency_client_generated.dart';
 import 'package:aries_vcx/src/_generated/agent_generated.dart';
+import 'package:aries_vcx/src/_generated/connection_generated.dart';
 import 'package:aries_vcx/src/_generated/credential_definition_generated.dart';
 import 'package:aries_vcx/src/_generated/disclosed_proof_generated.dart';
+import 'package:aries_vcx/src/_generated/testing_generated.dart';
+import 'package:aries_vcx/src/_generated/trustping_generated.dart';
 import 'package:aries_vcx/src/ffi/stub.dart'
     if (dart.library.io) 'package:aries_vcx/src/ffi/io.dart'
     if (dart.library.html) 'package:aries_vcx/src/ffi/web.dart';
@@ -36,6 +39,7 @@ class AriesVcxInterface {
     _instance.externalLibrary = externalLibrary;
     return _instance;
   }
+
   factory AriesVcxInterface.wasm(FutureOr<WasmModule> module) {
     _instance.externalLibrary = module;
     return _instance;
@@ -49,6 +53,8 @@ class AriesVcxInterface {
   AgencyClient get agencyClient => createAgencyClient();
 
   Agent get agent => createAgent();
+
+  Connection get connection => createConnection();
 
   CredentialDefinition get credentialDefinition => createCredentialDefinition();
 
@@ -73,6 +79,10 @@ class AriesVcxInterface {
   Schema get schema => createSchema();
 
   Utils get utils => createUtils();
+
+  Testing get testing => createTesting();
+
+  Trustping get trustping => createTrustping();
 
   Wallet get wallet => createWallet();
 }

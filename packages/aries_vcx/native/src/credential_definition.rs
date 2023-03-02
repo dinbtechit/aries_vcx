@@ -1,4 +1,4 @@
-use vcx::api_vcx::api_handle::credential_def;
+use libvcx_core::api_vcx::api_handle::credential_def;
 
 #[tokio::main(flavor = "current_thread")]
 pub async fn credentialdef_create_v2_(

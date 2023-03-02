@@ -24,6 +24,25 @@ class PoolPlatform extends FlutterRustBridgeBase<PoolWire>
   }
 
   @protected
+  List<dynamic> api2wire_box_autoadd_pool_config(PoolConfig raw) {
+    return api2wire_pool_config(raw);
+  }
+
+  @protected
+  String? api2wire_opt_String(String? raw) {
+    return raw == null ? null : api2wire_String(raw);
+  }
+
+  @protected
+  List<dynamic> api2wire_pool_config(PoolConfig raw) {
+    return [
+      api2wire_String(raw.genesisPath),
+      api2wire_opt_String(raw.poolName),
+      api2wire_opt_String(raw.poolConfig)
+    ];
+  }
+
+  @protected
   Uint8List api2wire_uint_8_list(Uint8List raw) {
     return raw;
   }
@@ -41,7 +60,7 @@ class PoolWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
   external PoolWasmModule bind(dynamic thisArg, String moduleName);
   external dynamic /* void */ wire_open_main_pool(
-      NativePortType port_, String pool_config);
+      NativePortType port_, List<dynamic> pool_config);
 
   external dynamic /* void */ wire_close_main_pool(NativePortType port_);
 }
@@ -52,7 +71,7 @@ class PoolWire extends FlutterRustBridgeWasmWireBase<PoolWasmModule> {
   PoolWire(FutureOr<WasmModule> module)
       : super(WasmModule.cast<PoolWasmModule>(module));
 
-  void wire_open_main_pool(NativePortType port_, String pool_config) =>
+  void wire_open_main_pool(NativePortType port_, List<dynamic> pool_config) =>
       wasmModule.wire_open_main_pool(port_, pool_config);
 
   void wire_close_main_pool(NativePortType port_) =>

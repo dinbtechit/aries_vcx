@@ -1,7 +1,7 @@
-use vcx::api_vcx::api_global::ledger;
+use libvcx_core::api_vcx::api_global::ledger;
 
 use flutter_rust_bridge::frb;
-pub use vcx::aries_vcx::messages::diddoc::aries::service::AriesService;
+pub use libvcx_core::aries_vcx::messages::diddoc::aries::service::AriesService;
 
 #[frb(mirror(AriesService))]
 #[derive(Debug, Clone)]

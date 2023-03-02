@@ -22,7 +22,7 @@ class LedgerPlatform extends FlutterRustBridgeBase<LedgerWire> {
 
   @protected
   ffi.Pointer<wire_StringList> api2wire_StringList(List<String> raw) {
-    final ans = inner.new_StringList_5(raw.length);
+    final ans = inner.new_StringList_6(raw.length);
     for (var i = 0; i < raw.length; i++) {
       ans.ref.ptr[i] = api2wire_String(raw[i]);
     }
@@ -41,7 +41,7 @@ class LedgerPlatform extends FlutterRustBridgeBase<LedgerWire> {
 
   @protected
   ffi.Pointer<wire_uint_8_list> api2wire_uint_8_list(Uint8List raw) {
-    final ans = inner.new_uint_8_list_5(raw.length);
+    final ans = inner.new_uint_8_list_6(raw.length);
     ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
     return ans;
   }
@@ -74,54 +74,6 @@ class LedgerWire implements FlutterRustBridgeWireBase {
       ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
           lookup)
       : _lookup = lookup;
-
-  ffi.Pointer<wire_IssuerConfig> new_box_autoadd_issuer_config_15() {
-    return _new_box_autoadd_issuer_config_15();
-  }
-
-  late final _new_box_autoadd_issuer_config_15Ptr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_IssuerConfig> Function()>>(
-          'new_box_autoadd_issuer_config_15');
-  late final _new_box_autoadd_issuer_config_15 =
-      _new_box_autoadd_issuer_config_15Ptr
-          .asFunction<ffi.Pointer<wire_IssuerConfig> Function()>();
-
-  ffi.Pointer<wire_RestoreWalletConfigs>
-      new_box_autoadd_restore_wallet_configs_15() {
-    return _new_box_autoadd_restore_wallet_configs_15();
-  }
-
-  late final _new_box_autoadd_restore_wallet_configs_15Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<wire_RestoreWalletConfigs>
-              Function()>>('new_box_autoadd_restore_wallet_configs_15');
-  late final _new_box_autoadd_restore_wallet_configs_15 =
-      _new_box_autoadd_restore_wallet_configs_15Ptr
-          .asFunction<ffi.Pointer<wire_RestoreWalletConfigs> Function()>();
-
-  ffi.Pointer<wire_WalletConfig> new_box_autoadd_wallet_config_15() {
-    return _new_box_autoadd_wallet_config_15();
-  }
-
-  late final _new_box_autoadd_wallet_config_15Ptr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_WalletConfig> Function()>>(
-          'new_box_autoadd_wallet_config_15');
-  late final _new_box_autoadd_wallet_config_15 =
-      _new_box_autoadd_wallet_config_15Ptr
-          .asFunction<ffi.Pointer<wire_WalletConfig> Function()>();
-
-  ffi.Pointer<wire_RevocationRegistryConfig>
-      new_box_autoadd_revocation_registry_config_12() {
-    return _new_box_autoadd_revocation_registry_config_12();
-  }
-
-  late final _new_box_autoadd_revocation_registry_config_12Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<wire_RevocationRegistryConfig>
-              Function()>>('new_box_autoadd_revocation_registry_config_12');
-  late final _new_box_autoadd_revocation_registry_config_12 =
-      _new_box_autoadd_revocation_registry_config_12Ptr
-          .asFunction<ffi.Pointer<wire_RevocationRegistryConfig> Function()>();
 
   void store_dart_post_cobject(
     DartPostCObjectFnType ptr,
@@ -329,33 +281,33 @@ class LedgerWire implements FlutterRustBridgeWireBase {
   late final _wire_get_ledger_txn = _wire_get_ledger_txnPtr
       .asFunction<void Function(int, int, ffi.Pointer<wire_uint_8_list>)>();
 
-  ffi.Pointer<wire_StringList> new_StringList_5(
+  ffi.Pointer<wire_StringList> new_StringList_6(
     int len,
   ) {
-    return _new_StringList_5(
+    return _new_StringList_6(
       len,
     );
   }
 
-  late final _new_StringList_5Ptr = _lookup<
+  late final _new_StringList_6Ptr = _lookup<
           ffi.NativeFunction<ffi.Pointer<wire_StringList> Function(ffi.Int32)>>(
-      'new_StringList_5');
-  late final _new_StringList_5 = _new_StringList_5Ptr
+      'new_StringList_6');
+  late final _new_StringList_6 = _new_StringList_6Ptr
       .asFunction<ffi.Pointer<wire_StringList> Function(int)>();
 
-  ffi.Pointer<wire_uint_8_list> new_uint_8_list_5(
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_6(
     int len,
   ) {
-    return _new_uint_8_list_5(
+    return _new_uint_8_list_6(
       len,
     );
   }
 
-  late final _new_uint_8_list_5Ptr = _lookup<
+  late final _new_uint_8_list_6Ptr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_uint_8_list> Function(
-              ffi.Int32)>>('new_uint_8_list_5');
-  late final _new_uint_8_list_5 = _new_uint_8_list_5Ptr
+              ffi.Int32)>>('new_uint_8_list_6');
+  late final _new_uint_8_list_6 = _new_uint_8_list_6Ptr
       .asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
 
   ffi.Pointer<wire_AgencyClientConfig>
@@ -405,54 +357,6 @@ class wire_uint_8_list extends ffi.Struct {
 
   @ffi.Int32()
   external int len;
-}
-
-class wire_IssuerConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> institution_did;
-}
-
-class wire_RestoreWalletConfigs extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> wallet_name;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key;
-
-  external ffi.Pointer<wire_uint_8_list> exported_wallet_path;
-
-  external ffi.Pointer<wire_uint_8_list> backup_key;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key_derivation;
-}
-
-class wire_WalletConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> wallet_name;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key_derivation;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_type;
-
-  external ffi.Pointer<wire_uint_8_list> storage_config;
-
-  external ffi.Pointer<wire_uint_8_list> storage_credentials;
-
-  external ffi.Pointer<wire_uint_8_list> rekey;
-
-  external ffi.Pointer<wire_uint_8_list> rekey_derivation_method;
-}
-
-class wire_RevocationRegistryConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> issuer_did;
-
-  external ffi.Pointer<wire_uint_8_list> cred_def_id;
-
-  @ffi.Uint32()
-  external int tag;
-
-  external ffi.Pointer<wire_uint_8_list> tails_dir;
-
-  @ffi.Uint32()
-  external int max_creds;
 }
 
 class wire_StringList extends ffi.Struct {

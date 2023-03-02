@@ -19,6 +19,8 @@ use std::sync::Arc;
 
 // Section: imports
 
+use crate::connection::PairwiseInfo;
+
 // Section: wire functions
 
 fn wire_wallet_open_as_main_impl(
@@ -538,23 +540,23 @@ mod io {
     // Section: allocate functions
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_issuer_config_15() -> *mut wire_IssuerConfig {
+    pub extern "C" fn new_box_autoadd_issuer_config_18() -> *mut wire_IssuerConfig {
         support::new_leak_box_ptr(wire_IssuerConfig::new_with_null_ptr())
     }
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_restore_wallet_configs_15() -> *mut wire_RestoreWalletConfigs
+    pub extern "C" fn new_box_autoadd_restore_wallet_configs_18() -> *mut wire_RestoreWalletConfigs
     {
         support::new_leak_box_ptr(wire_RestoreWalletConfigs::new_with_null_ptr())
     }
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_wallet_config_15() -> *mut wire_WalletConfig {
+    pub extern "C" fn new_box_autoadd_wallet_config_18() -> *mut wire_WalletConfig {
         support::new_leak_box_ptr(wire_WalletConfig::new_with_null_ptr())
     }
 
     #[no_mangle]
-    pub extern "C" fn new_uint_8_list_15(len: i32) -> *mut wire_uint_8_list {
+    pub extern "C" fn new_uint_8_list_18(len: i32) -> *mut wire_uint_8_list {
         let ans = wire_uint_8_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,

@@ -1,12 +1,12 @@
 
-use vcx::api_vcx::api_handle::mediated_connection;
-pub use vcx::api_vcx::api_handle::mediated_connection::{MessageByConnection, parse_status_codes};
-pub use vcx::aries_vcx::agency_client::api::downloaded_message::DownloadedMessage;
-pub use vcx::aries_vcx::agency_client::MessageStatusCode;
+use libvcx_core::api_vcx::api_handle::mediated_connection;
+pub use libvcx_core::api_vcx::api_handle::mediated_connection::{MessageByConnection, parse_status_codes};
+pub use libvcx_core::aries_vcx::agency_client::api::downloaded_message::DownloadedMessage;
+pub use libvcx_core::aries_vcx::agency_client::MessageStatusCode;
 use flutter_rust_bridge::frb;
-use vcx::aries_vcx::protocols::connection::pairwise_info::PairwiseInfo;
-use vcx::errors::error::{LibvcxError, LibvcxErrorKind};
-use vcx::serde_json;
+use libvcx_core::aries_vcx::protocols::connection::pairwise_info::PairwiseInfo;
+use libvcx_core::errors::error::{LibvcxError, LibvcxErrorKind};
+use libvcx_core::serde_json;
 
 #[frb(mirror(MessageByConnection))]
 pub struct _MessageByConnection {

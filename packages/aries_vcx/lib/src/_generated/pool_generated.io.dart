@@ -21,14 +21,39 @@ class PoolPlatform extends FlutterRustBridgeBase<PoolWire> {
   }
 
   @protected
+  ffi.Pointer<wire_PoolConfig> api2wire_box_autoadd_pool_config(
+      PoolConfig raw) {
+    final ptr = inner.new_box_autoadd_pool_config_11();
+    _api_fill_to_wire_pool_config(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<wire_uint_8_list> api2wire_opt_String(String? raw) {
+    return raw == null ? ffi.nullptr : api2wire_String(raw);
+  }
+
+  @protected
   ffi.Pointer<wire_uint_8_list> api2wire_uint_8_list(Uint8List raw) {
-    final ans = inner.new_uint_8_list_10(raw.length);
+    final ans = inner.new_uint_8_list_11(raw.length);
     ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
     return ans;
   }
 // Section: finalizer
 
 // Section: api_fill_to_wire
+
+  void _api_fill_to_wire_box_autoadd_pool_config(
+      PoolConfig apiObj, ffi.Pointer<wire_PoolConfig> wireObj) {
+    _api_fill_to_wire_pool_config(apiObj, wireObj.ref);
+  }
+
+  void _api_fill_to_wire_pool_config(
+      PoolConfig apiObj, wire_PoolConfig wireObj) {
+    wireObj.genesis_path = api2wire_String(apiObj.genesisPath);
+    wireObj.pool_name = api2wire_opt_String(apiObj.poolName);
+    wireObj.pool_config = api2wire_opt_String(apiObj.poolConfig);
+  }
 }
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_positional_boolean_parameters, annotate_overrides, constant_identifier_names
@@ -54,54 +79,6 @@ class PoolWire implements FlutterRustBridgeWireBase {
       ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
           lookup)
       : _lookup = lookup;
-
-  ffi.Pointer<wire_IssuerConfig> new_box_autoadd_issuer_config_15() {
-    return _new_box_autoadd_issuer_config_15();
-  }
-
-  late final _new_box_autoadd_issuer_config_15Ptr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_IssuerConfig> Function()>>(
-          'new_box_autoadd_issuer_config_15');
-  late final _new_box_autoadd_issuer_config_15 =
-      _new_box_autoadd_issuer_config_15Ptr
-          .asFunction<ffi.Pointer<wire_IssuerConfig> Function()>();
-
-  ffi.Pointer<wire_RestoreWalletConfigs>
-      new_box_autoadd_restore_wallet_configs_15() {
-    return _new_box_autoadd_restore_wallet_configs_15();
-  }
-
-  late final _new_box_autoadd_restore_wallet_configs_15Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<wire_RestoreWalletConfigs>
-              Function()>>('new_box_autoadd_restore_wallet_configs_15');
-  late final _new_box_autoadd_restore_wallet_configs_15 =
-      _new_box_autoadd_restore_wallet_configs_15Ptr
-          .asFunction<ffi.Pointer<wire_RestoreWalletConfigs> Function()>();
-
-  ffi.Pointer<wire_WalletConfig> new_box_autoadd_wallet_config_15() {
-    return _new_box_autoadd_wallet_config_15();
-  }
-
-  late final _new_box_autoadd_wallet_config_15Ptr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_WalletConfig> Function()>>(
-          'new_box_autoadd_wallet_config_15');
-  late final _new_box_autoadd_wallet_config_15 =
-      _new_box_autoadd_wallet_config_15Ptr
-          .asFunction<ffi.Pointer<wire_WalletConfig> Function()>();
-
-  ffi.Pointer<wire_RevocationRegistryConfig>
-      new_box_autoadd_revocation_registry_config_12() {
-    return _new_box_autoadd_revocation_registry_config_12();
-  }
-
-  late final _new_box_autoadd_revocation_registry_config_12Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<wire_RevocationRegistryConfig>
-              Function()>>('new_box_autoadd_revocation_registry_config_12');
-  late final _new_box_autoadd_revocation_registry_config_12 =
-      _new_box_autoadd_revocation_registry_config_12Ptr
-          .asFunction<ffi.Pointer<wire_RevocationRegistryConfig> Function()>();
 
   void store_dart_post_cobject(
     DartPostCObjectFnType ptr,
@@ -175,7 +152,7 @@ class PoolWire implements FlutterRustBridgeWireBase {
 
   void wire_open_main_pool(
     int port_,
-    ffi.Pointer<wire_uint_8_list> pool_config,
+    ffi.Pointer<wire_PoolConfig> pool_config,
   ) {
     return _wire_open_main_pool(
       port_,
@@ -185,10 +162,10 @@ class PoolWire implements FlutterRustBridgeWireBase {
 
   late final _wire_open_main_poolPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Int64,
-              ffi.Pointer<wire_uint_8_list>)>>('wire_open_main_pool');
+          ffi.Void Function(
+              ffi.Int64, ffi.Pointer<wire_PoolConfig>)>>('wire_open_main_pool');
   late final _wire_open_main_pool = _wire_open_main_poolPtr
-      .asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>)>();
+      .asFunction<void Function(int, ffi.Pointer<wire_PoolConfig>)>();
 
   void wire_close_main_pool(
     int port_,
@@ -204,19 +181,30 @@ class PoolWire implements FlutterRustBridgeWireBase {
   late final _wire_close_main_pool =
       _wire_close_main_poolPtr.asFunction<void Function(int)>();
 
-  ffi.Pointer<wire_uint_8_list> new_uint_8_list_10(
+  ffi.Pointer<wire_PoolConfig> new_box_autoadd_pool_config_11() {
+    return _new_box_autoadd_pool_config_11();
+  }
+
+  late final _new_box_autoadd_pool_config_11Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<wire_PoolConfig> Function()>>(
+          'new_box_autoadd_pool_config_11');
+  late final _new_box_autoadd_pool_config_11 =
+      _new_box_autoadd_pool_config_11Ptr
+          .asFunction<ffi.Pointer<wire_PoolConfig> Function()>();
+
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_11(
     int len,
   ) {
-    return _new_uint_8_list_10(
+    return _new_uint_8_list_11(
       len,
     );
   }
 
-  late final _new_uint_8_list_10Ptr = _lookup<
+  late final _new_uint_8_list_11Ptr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_uint_8_list> Function(
-              ffi.Int32)>>('new_uint_8_list_10');
-  late final _new_uint_8_list_10 = _new_uint_8_list_10Ptr
+              ffi.Int32)>>('new_uint_8_list_11');
+  late final _new_uint_8_list_11 = _new_uint_8_list_11Ptr
       .asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
 
   ffi.Pointer<wire_AgencyClientConfig>
@@ -268,52 +256,12 @@ class wire_uint_8_list extends ffi.Struct {
   external int len;
 }
 
-class wire_IssuerConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> institution_did;
-}
+class wire_PoolConfig extends ffi.Struct {
+  external ffi.Pointer<wire_uint_8_list> genesis_path;
 
-class wire_RestoreWalletConfigs extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> wallet_name;
+  external ffi.Pointer<wire_uint_8_list> pool_name;
 
-  external ffi.Pointer<wire_uint_8_list> wallet_key;
-
-  external ffi.Pointer<wire_uint_8_list> exported_wallet_path;
-
-  external ffi.Pointer<wire_uint_8_list> backup_key;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key_derivation;
-}
-
-class wire_WalletConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> wallet_name;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key_derivation;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_type;
-
-  external ffi.Pointer<wire_uint_8_list> storage_config;
-
-  external ffi.Pointer<wire_uint_8_list> storage_credentials;
-
-  external ffi.Pointer<wire_uint_8_list> rekey;
-
-  external ffi.Pointer<wire_uint_8_list> rekey_derivation_method;
-}
-
-class wire_RevocationRegistryConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> issuer_did;
-
-  external ffi.Pointer<wire_uint_8_list> cred_def_id;
-
-  @ffi.Uint32()
-  external int tag;
-
-  external ffi.Pointer<wire_uint_8_list> tails_dir;
-
-  @ffi.Uint32()
-  external int max_creds;
+  external ffi.Pointer<wire_uint_8_list> pool_config;
 }
 
 class wire_AgencyClientConfig extends ffi.Struct {

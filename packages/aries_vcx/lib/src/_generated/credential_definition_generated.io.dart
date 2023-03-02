@@ -24,7 +24,7 @@ class CredentialDefinitionPlatform
 
   @protected
   ffi.Pointer<wire_uint_8_list> api2wire_uint_8_list(Uint8List raw) {
-    final ans = inner.new_uint_8_list_2(raw.length);
+    final ans = inner.new_uint_8_list_3(raw.length);
     ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
     return ans;
   }
@@ -57,54 +57,6 @@ class CredentialDefinitionWire implements FlutterRustBridgeWireBase {
       ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
           lookup)
       : _lookup = lookup;
-
-  ffi.Pointer<wire_IssuerConfig> new_box_autoadd_issuer_config_15() {
-    return _new_box_autoadd_issuer_config_15();
-  }
-
-  late final _new_box_autoadd_issuer_config_15Ptr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_IssuerConfig> Function()>>(
-          'new_box_autoadd_issuer_config_15');
-  late final _new_box_autoadd_issuer_config_15 =
-      _new_box_autoadd_issuer_config_15Ptr
-          .asFunction<ffi.Pointer<wire_IssuerConfig> Function()>();
-
-  ffi.Pointer<wire_RestoreWalletConfigs>
-      new_box_autoadd_restore_wallet_configs_15() {
-    return _new_box_autoadd_restore_wallet_configs_15();
-  }
-
-  late final _new_box_autoadd_restore_wallet_configs_15Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<wire_RestoreWalletConfigs>
-              Function()>>('new_box_autoadd_restore_wallet_configs_15');
-  late final _new_box_autoadd_restore_wallet_configs_15 =
-      _new_box_autoadd_restore_wallet_configs_15Ptr
-          .asFunction<ffi.Pointer<wire_RestoreWalletConfigs> Function()>();
-
-  ffi.Pointer<wire_WalletConfig> new_box_autoadd_wallet_config_15() {
-    return _new_box_autoadd_wallet_config_15();
-  }
-
-  late final _new_box_autoadd_wallet_config_15Ptr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_WalletConfig> Function()>>(
-          'new_box_autoadd_wallet_config_15');
-  late final _new_box_autoadd_wallet_config_15 =
-      _new_box_autoadd_wallet_config_15Ptr
-          .asFunction<ffi.Pointer<wire_WalletConfig> Function()>();
-
-  ffi.Pointer<wire_RevocationRegistryConfig>
-      new_box_autoadd_revocation_registry_config_12() {
-    return _new_box_autoadd_revocation_registry_config_12();
-  }
-
-  late final _new_box_autoadd_revocation_registry_config_12Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<wire_RevocationRegistryConfig>
-              Function()>>('new_box_autoadd_revocation_registry_config_12');
-  late final _new_box_autoadd_revocation_registry_config_12 =
-      _new_box_autoadd_revocation_registry_config_12Ptr
-          .asFunction<ffi.Pointer<wire_RevocationRegistryConfig> Function()>();
 
   void store_dart_post_cobject(
     DartPostCObjectFnType ptr,
@@ -324,19 +276,19 @@ class CredentialDefinitionWire implements FlutterRustBridgeWireBase {
   late final _wire_credentialdef_get_state =
       _wire_credentialdef_get_statePtr.asFunction<void Function(int, int)>();
 
-  ffi.Pointer<wire_uint_8_list> new_uint_8_list_2(
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_3(
     int len,
   ) {
-    return _new_uint_8_list_2(
+    return _new_uint_8_list_3(
       len,
     );
   }
 
-  late final _new_uint_8_list_2Ptr = _lookup<
+  late final _new_uint_8_list_3Ptr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_uint_8_list> Function(
-              ffi.Int32)>>('new_uint_8_list_2');
-  late final _new_uint_8_list_2 = _new_uint_8_list_2Ptr
+              ffi.Int32)>>('new_uint_8_list_3');
+  late final _new_uint_8_list_3 = _new_uint_8_list_3Ptr
       .asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
 
   ffi.Pointer<wire_AgencyClientConfig>
@@ -386,54 +338,6 @@ class wire_uint_8_list extends ffi.Struct {
 
   @ffi.Int32()
   external int len;
-}
-
-class wire_IssuerConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> institution_did;
-}
-
-class wire_RestoreWalletConfigs extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> wallet_name;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key;
-
-  external ffi.Pointer<wire_uint_8_list> exported_wallet_path;
-
-  external ffi.Pointer<wire_uint_8_list> backup_key;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key_derivation;
-}
-
-class wire_WalletConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> wallet_name;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_key_derivation;
-
-  external ffi.Pointer<wire_uint_8_list> wallet_type;
-
-  external ffi.Pointer<wire_uint_8_list> storage_config;
-
-  external ffi.Pointer<wire_uint_8_list> storage_credentials;
-
-  external ffi.Pointer<wire_uint_8_list> rekey;
-
-  external ffi.Pointer<wire_uint_8_list> rekey_derivation_method;
-}
-
-class wire_RevocationRegistryConfig extends ffi.Struct {
-  external ffi.Pointer<wire_uint_8_list> issuer_did;
-
-  external ffi.Pointer<wire_uint_8_list> cred_def_id;
-
-  @ffi.Uint32()
-  external int tag;
-
-  external ffi.Pointer<wire_uint_8_list> tails_dir;
-
-  @ffi.Uint32()
-  external int max_creds;
 }
 
 class wire_AgencyClientConfig extends ffi.Struct {

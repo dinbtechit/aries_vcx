@@ -1,6 +1,6 @@
 use flutter_rust_bridge::frb;
-use vcx::api_vcx::api_global::agency_client;
-pub use vcx::aries_vcx::agency_client::configuration::{AgentProvisionConfig, AgencyClientConfig};
+use libvcx_core::api_vcx::api_global::agency_client;
+pub use libvcx_core::aries_vcx::agency_client::configuration::{AgencyClientConfig, AgentProvisionConfig};
 
 #[frb(mirror(AgentProvisionConfig))]
 #[derive(Default, Clone)]

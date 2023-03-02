@@ -1,4 +1,4 @@
-use vcx::api_vcx::api_handle::out_of_band;
+use libvcx_core::api_vcx::api_handle::out_of_band;
 
 
 pub fn out_of_band_sender_create(config: String) -> anyhow::Result<u32> {

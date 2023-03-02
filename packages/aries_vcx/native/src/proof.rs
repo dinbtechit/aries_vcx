@@ -1,4 +1,4 @@
-use vcx::api_vcx::api_handle::proof;
+use libvcx_core::api_vcx::api_handle::proof;
 
 #[tokio::main(flavor = "current_thread")]
 pub async fn proof_create(

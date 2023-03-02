@@ -1,7 +1,7 @@
-use vcx::api_vcx::api_global::settings::settings_init_issuer_config;
-use vcx::api_vcx::api_global::{ledger, wallet};
-pub use vcx::aries_vcx::indy::wallet::{IssuerConfig, RestoreWalletConfigs, WalletConfig};
-pub use vcx::aries_vcx::protocols::connection::pairwise_info::PairwiseInfo;
+use libvcx_core::api_vcx::api_global::settings::settings_init_issuer_config;
+use libvcx_core::api_vcx::api_global::{ledger, wallet};
+pub use libvcx_core::aries_vcx::indy::wallet::{IssuerConfig, RestoreWalletConfigs, WalletConfig};
+pub use libvcx_core::aries_vcx::protocols::connection::pairwise_info::PairwiseInfo;
 
 
 

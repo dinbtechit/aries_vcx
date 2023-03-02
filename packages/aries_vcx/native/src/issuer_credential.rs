@@ -1,6 +1,6 @@
-use vcx::api_vcx::api_handle::issuer_credential;
-use vcx::aries_vcx::messages::a2a::A2AMessage;
-use vcx::serde_json::json;
+use libvcx_core::api_vcx::api_handle::issuer_credential;
+use libvcx_core::aries_vcx::messages::a2a::A2AMessage;
+use libvcx_core::serde_json::json;
 
 
 pub fn issuer_credential_deserialize(credential_data: String) -> anyhow::Result<u32> {

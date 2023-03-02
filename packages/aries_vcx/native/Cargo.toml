@@ -12,7 +12,7 @@ heck = "0.4.0"
 
 [dependencies]
 flutter_rust_bridge = "1.61.*"
-libvcx = { git="https://github.com/hyperledger/aries-vcx" , default-features = false }
+libvcx_core = { git="https://github.com/hyperledger/aries-vcx", branch="main", default-features = false }
 futures = "0.3"
 anyhow = "1.0.*"
 tokio = { version = "1.14.0", features = ["rt", "macros"] }

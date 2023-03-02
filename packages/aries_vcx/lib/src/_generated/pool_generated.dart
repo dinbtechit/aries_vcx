@@ -15,13 +15,25 @@ import 'pool_generated.io.dart'
     if (dart.library.html) 'pool_generated.web.dart';
 
 abstract class Pool {
-  Future<void> openMainPool({required String poolConfig, dynamic hint});
+  Future<void> openMainPool({required PoolConfig poolConfig, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kOpenMainPoolConstMeta;
 
   Future<void> closeMainPool({dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kCloseMainPoolConstMeta;
+}
+
+class PoolConfig {
+  final String genesisPath;
+  final String? poolName;
+  final String? poolConfig;
+
+  PoolConfig({
+    required this.genesisPath,
+    this.poolName,
+    this.poolConfig,
+  });
 }
 
 class PoolImpl implements Pool {
@@ -32,8 +44,8 @@ class PoolImpl implements Pool {
   factory PoolImpl.wasm(FutureOr<WasmModule> module) =>
       PoolImpl(module as ExternalLibrary);
   PoolImpl.raw(this._platform);
-  Future<void> openMainPool({required String poolConfig, dynamic hint}) {
-    var arg0 = _platform.api2wire_String(poolConfig);
+  Future<void> openMainPool({required PoolConfig poolConfig, dynamic hint}) {
+    var arg0 = _platform.api2wire_box_autoadd_pool_config(poolConfig);
     return _platform.executeNormal(FlutterRustBridgeTask(
       callFfi: (port_) => _platform.inner.wire_open_main_pool(port_, arg0),
       parseSuccessData: _wire2api_unit,

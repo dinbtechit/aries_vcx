@@ -404,7 +404,7 @@ mod io {
     // Section: allocate functions
 
     #[no_mangle]
-    pub extern "C" fn new_StringList_5(len: i32) -> *mut wire_StringList {
+    pub extern "C" fn new_StringList_6(len: i32) -> *mut wire_StringList {
         let wrap = wire_StringList {
             ptr: support::new_leak_vec_ptr(<*mut wire_uint_8_list>::new_with_null_ptr(), len),
             len,
@@ -413,7 +413,7 @@ mod io {
     }
 
     #[no_mangle]
-    pub extern "C" fn new_uint_8_list_5(len: i32) -> *mut wire_uint_8_list {
+    pub extern "C" fn new_uint_8_list_6(len: i32) -> *mut wire_uint_8_list {
         let ans = wire_uint_8_list {
             ptr: support::new_leak_vec_ptr(Default::default(), len),
             len,

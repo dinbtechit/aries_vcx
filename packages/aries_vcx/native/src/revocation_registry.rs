@@ -1,5 +1,5 @@
-pub use vcx::api_vcx::api_handle::revocation_registry::RevocationRegistryConfig;
-use vcx::api_vcx::api_handle::revocation_registry;
+pub use libvcx_core::api_vcx::api_handle::revocation_registry::RevocationRegistryConfig;
+use libvcx_core::api_vcx::api_handle::revocation_registry;
 
 
 use flutter_rust_bridge::frb;

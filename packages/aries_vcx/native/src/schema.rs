@@ -1,4 +1,4 @@
-use vcx::api_vcx::api_handle::schema;
+use libvcx_core::api_vcx::api_handle::schema;
 
 pub fn schema_get_attributes(_source_id: String, _schema_id: String) -> anyhow::Result<()> {
     unimplemented!("Not implemented in napi wrapper yet")

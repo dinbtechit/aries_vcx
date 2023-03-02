@@ -1,4 +1,4 @@
-use vcx::api_vcx::api_handle::disclosed_proof;
+use libvcx_core::api_vcx::api_handle::disclosed_proof;
 
 
 pub fn disclosed_proof_create_with_request(source_id: String, proof_req: String) -> anyhow::Result<u32> {

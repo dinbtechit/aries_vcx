@@ -12,7 +12,7 @@ use lib_flutter_rust_bridge_codegen::{
 
 
 const TEMPLATE_RUST_INPUT: &str = "src/$$TEMPLATE$$.rs";
-const TEMPLATE_DART_OUTPUT: &str = "../lib/src/$$TEMPLATE$$_generated.dart";
+const TEMPLATE_DART_OUTPUT: &str = "../lib/src/_generated/$$TEMPLATE$$_generated.dart";
 const TEMPLATE_RUST_OUTPUT: &str = "src/$$TEMPLATE$$_generated.rs";
 const TEMPLATE_CLASS_NAME: &str = "$$TEMPLATE$$";
 const TEMPLATE_IOS_C_OUTPUT: &str = "../../flutter_aries_vcx/ios/Classes/$$TEMPLATE$$.h";
@@ -22,6 +22,7 @@ const TEMPLATE_MACOS_C_OUTPUT: &str = "../../flutter_aries_vcx/macos/Classes/$$T
 fn main() {
     let list_of_files: Vec<&str> = vec!["agency_client",
                                         "agent",
+                                        "connection",
                                         "credential_definition",
                                         "disclosed_proof",
                                         "issuer_credential",
@@ -34,6 +35,8 @@ fn main() {
                                         "proof",
                                         "revocation_registry",
                                         "schema",
+                                        "testing",
+                                        "trustping",
                                         "utils",
                                         "wallet",
     ];

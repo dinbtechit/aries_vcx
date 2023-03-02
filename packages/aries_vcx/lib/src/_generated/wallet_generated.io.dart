@@ -23,7 +23,7 @@ class WalletPlatform extends FlutterRustBridgeBase<WalletWire> {
   @protected
   ffi.Pointer<wire_IssuerConfig> api2wire_box_autoadd_issuer_config(
       IssuerConfig raw) {
-    final ptr = inner.new_box_autoadd_issuer_config_15();
+    final ptr = inner.new_box_autoadd_issuer_config_18();
     _api_fill_to_wire_issuer_config(raw, ptr.ref);
     return ptr;
   }
@@ -31,7 +31,7 @@ class WalletPlatform extends FlutterRustBridgeBase<WalletWire> {
   @protected
   ffi.Pointer<wire_RestoreWalletConfigs>
       api2wire_box_autoadd_restore_wallet_configs(RestoreWalletConfigs raw) {
-    final ptr = inner.new_box_autoadd_restore_wallet_configs_15();
+    final ptr = inner.new_box_autoadd_restore_wallet_configs_18();
     _api_fill_to_wire_restore_wallet_configs(raw, ptr.ref);
     return ptr;
   }
@@ -39,7 +39,7 @@ class WalletPlatform extends FlutterRustBridgeBase<WalletWire> {
   @protected
   ffi.Pointer<wire_WalletConfig> api2wire_box_autoadd_wallet_config(
       WalletConfig raw) {
-    final ptr = inner.new_box_autoadd_wallet_config_15();
+    final ptr = inner.new_box_autoadd_wallet_config_18();
     _api_fill_to_wire_wallet_config(raw, ptr.ref);
     return ptr;
   }
@@ -51,7 +51,7 @@ class WalletPlatform extends FlutterRustBridgeBase<WalletWire> {
 
   @protected
   ffi.Pointer<wire_uint_8_list> api2wire_uint_8_list(Uint8List raw) {
-    final ans = inner.new_uint_8_list_15(raw.length);
+    final ans = inner.new_uint_8_list_18(raw.length);
     ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
     return ans;
   }
@@ -423,68 +423,79 @@ class WalletWire implements FlutterRustBridgeWireBase {
           void Function(int, ffi.Pointer<wire_uint_8_list>,
               ffi.Pointer<wire_uint_8_list>)>();
 
-  ffi.Pointer<wire_IssuerConfig> new_box_autoadd_issuer_config_15() {
-    return _new_box_autoadd_issuer_config_15();
+  ffi.Pointer<wire_IssuerConfig> new_box_autoadd_issuer_config_18() {
+    return _new_box_autoadd_issuer_config_18();
   }
 
-  late final _new_box_autoadd_issuer_config_15Ptr =
+  late final _new_box_autoadd_issuer_config_18Ptr =
       _lookup<ffi.NativeFunction<ffi.Pointer<wire_IssuerConfig> Function()>>(
-          'new_box_autoadd_issuer_config_15');
-  late final _new_box_autoadd_issuer_config_15 =
-      _new_box_autoadd_issuer_config_15Ptr
+          'new_box_autoadd_issuer_config_18');
+  late final _new_box_autoadd_issuer_config_18 =
+      _new_box_autoadd_issuer_config_18Ptr
           .asFunction<ffi.Pointer<wire_IssuerConfig> Function()>();
 
   ffi.Pointer<wire_RestoreWalletConfigs>
-      new_box_autoadd_restore_wallet_configs_15() {
-    return _new_box_autoadd_restore_wallet_configs_15();
+      new_box_autoadd_restore_wallet_configs_18() {
+    return _new_box_autoadd_restore_wallet_configs_18();
   }
 
-  late final _new_box_autoadd_restore_wallet_configs_15Ptr = _lookup<
+  late final _new_box_autoadd_restore_wallet_configs_18Ptr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_RestoreWalletConfigs>
-              Function()>>('new_box_autoadd_restore_wallet_configs_15');
-  late final _new_box_autoadd_restore_wallet_configs_15 =
-      _new_box_autoadd_restore_wallet_configs_15Ptr
+              Function()>>('new_box_autoadd_restore_wallet_configs_18');
+  late final _new_box_autoadd_restore_wallet_configs_18 =
+      _new_box_autoadd_restore_wallet_configs_18Ptr
           .asFunction<ffi.Pointer<wire_RestoreWalletConfigs> Function()>();
 
-  ffi.Pointer<wire_WalletConfig> new_box_autoadd_wallet_config_15() {
-    return _new_box_autoadd_wallet_config_15();
+  ffi.Pointer<wire_WalletConfig> new_box_autoadd_wallet_config_18() {
+    return _new_box_autoadd_wallet_config_18();
   }
 
-  late final _new_box_autoadd_wallet_config_15Ptr =
+  late final _new_box_autoadd_wallet_config_18Ptr =
       _lookup<ffi.NativeFunction<ffi.Pointer<wire_WalletConfig> Function()>>(
-          'new_box_autoadd_wallet_config_15');
-  late final _new_box_autoadd_wallet_config_15 =
-      _new_box_autoadd_wallet_config_15Ptr
+          'new_box_autoadd_wallet_config_18');
+  late final _new_box_autoadd_wallet_config_18 =
+      _new_box_autoadd_wallet_config_18Ptr
           .asFunction<ffi.Pointer<wire_WalletConfig> Function()>();
 
-  ffi.Pointer<wire_uint_8_list> new_uint_8_list_15(
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_18(
     int len,
   ) {
-    return _new_uint_8_list_15(
+    return _new_uint_8_list_18(
       len,
     );
   }
 
-  late final _new_uint_8_list_15Ptr = _lookup<
+  late final _new_uint_8_list_18Ptr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_uint_8_list> Function(
-              ffi.Int32)>>('new_uint_8_list_15');
-  late final _new_uint_8_list_15 = _new_uint_8_list_15Ptr
+              ffi.Int32)>>('new_uint_8_list_18');
+  late final _new_uint_8_list_18 = _new_uint_8_list_18Ptr
       .asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
 
   ffi.Pointer<wire_RevocationRegistryConfig>
-      new_box_autoadd_revocation_registry_config_12() {
-    return _new_box_autoadd_revocation_registry_config_12();
+      new_box_autoadd_revocation_registry_config_13() {
+    return _new_box_autoadd_revocation_registry_config_13();
   }
 
-  late final _new_box_autoadd_revocation_registry_config_12Ptr = _lookup<
+  late final _new_box_autoadd_revocation_registry_config_13Ptr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_RevocationRegistryConfig>
-              Function()>>('new_box_autoadd_revocation_registry_config_12');
-  late final _new_box_autoadd_revocation_registry_config_12 =
-      _new_box_autoadd_revocation_registry_config_12Ptr
+              Function()>>('new_box_autoadd_revocation_registry_config_13');
+  late final _new_box_autoadd_revocation_registry_config_13 =
+      _new_box_autoadd_revocation_registry_config_13Ptr
           .asFunction<ffi.Pointer<wire_RevocationRegistryConfig> Function()>();
+
+  ffi.Pointer<wire_PoolConfig> new_box_autoadd_pool_config_11() {
+    return _new_box_autoadd_pool_config_11();
+  }
+
+  late final _new_box_autoadd_pool_config_11Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<wire_PoolConfig> Function()>>(
+          'new_box_autoadd_pool_config_11');
+  late final _new_box_autoadd_pool_config_11 =
+      _new_box_autoadd_pool_config_11Ptr
+          .asFunction<ffi.Pointer<wire_PoolConfig> Function()>();
 
   ffi.Pointer<wire_AgencyClientConfig>
       new_box_autoadd_agency_client_config_0() {
@@ -581,6 +592,14 @@ class wire_RevocationRegistryConfig extends ffi.Struct {
 
   @ffi.Uint32()
   external int max_creds;
+}
+
+class wire_PoolConfig extends ffi.Struct {
+  external ffi.Pointer<wire_uint_8_list> genesis_path;
+
+  external ffi.Pointer<wire_uint_8_list> pool_name;
+
+  external ffi.Pointer<wire_uint_8_list> pool_config;
 }
 
 class wire_AgencyClientConfig extends ffi.Struct {

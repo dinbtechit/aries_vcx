@@ -8,6 +8,5 @@ Future<void> main() async {
     var ariesVcx = await AriesVcx.defaultInstance;
     expect(ariesVcx.ledger, isNotNull);
 
-    await ariesVcx;
   });
 }

@@ -105,6 +105,9 @@ do
             --manifest-path ../Cargo.toml \
             -t $CARGO_TARGET \
             build --release
+    # Copy additional Dependencies
+    cp $LIBZMQ_LIB_DIR/libzmq.so $JNI_DIR/$CARGO_TARGET
+    cp $SODIUM_LIB_DIR/libsodium.so $JNI_DIR/$CARGO_TARGET
 done
 
 #rustup target add \

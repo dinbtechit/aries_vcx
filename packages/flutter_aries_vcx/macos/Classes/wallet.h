@@ -208,7 +208,7 @@ struct wire_AgentProvisionConfig *new_box_autoadd_agent_provision_config_0(void)
 
 void free_WireSyncReturn(WireSyncReturn ptr);
 
-static int64_t dummy_method_to_enforce_bundling(void) {
+static int64_t dummy_method_to_enforce_bundling_Wallet(void) {
     int64_t dummy_var = 0;
     dummy_var ^= ((int64_t) (void*) wire_wallet_open_as_main);
     dummy_var ^= ((int64_t) (void*) wire_wallet_create_main);

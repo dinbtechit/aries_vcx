@@ -1,7 +1,5 @@
 use heck::ToPascalCase;
-use lib_flutter_rust_bridge_codegen::{
-    config_parse, frb_codegen, get_symbols_if_no_duplicates, RawOpts,
-};
+use lib_flutter_rust_bridge_codegen::{config_parse, frb_codegen_multi, get_symbols_if_no_duplicates, RawOpts};
 
 // const RUST_INPUT: &str = "src/api.rs";
 // const DART_OUTPUT: &str = "../lib/src/bridge_generated.dart";
@@ -84,8 +82,8 @@ fn main() {
     // Generate Rust & Dart ffi bridges
     let configs = config_parse(raw_opts);
     let all_symbols = get_symbols_if_no_duplicates(&configs).unwrap();
-    for config in configs.iter() {
-        frb_codegen(config, &all_symbols).unwrap();
+    for (config_index, _) in configs.iter().enumerate() {
+        frb_codegen_multi(&configs, config_index, &all_symbols).unwrap();
     }
 
     // Copy ios/ generated C files to macos/

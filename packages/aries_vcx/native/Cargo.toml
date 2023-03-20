@@ -11,7 +11,7 @@ flutter_rust_bridge_codegen = "1.67.*"
 heck = "0.4.0"
 
 [dependencies]
-flutter_rust_bridge = "1.67.*"
+flutter_rust_bridge = "1.71.*"
 libvcx_core = { git="https://github.com/hyperledger/aries-vcx", branch="main", default-features = false }
 futures = "0.3"
 anyhow = "1.0.*"
